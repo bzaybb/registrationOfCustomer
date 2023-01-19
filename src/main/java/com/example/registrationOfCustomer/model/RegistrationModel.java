@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class RegistrationModel {
 
+    private String loginType;
     private String firstName;
     private String lastName;
     private String emailAddress;
