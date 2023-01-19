@@ -30,7 +30,7 @@ public class CustomerEntity {
     @Column (name= "mobile_Num")
     private String mobileNumber;
 
-    @Column (name= "passowrd")
+    @Column (name= "password")
     private String password;
 
     @Column (name ="confirm_Password")
