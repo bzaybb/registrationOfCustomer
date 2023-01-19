@@ -14,10 +14,15 @@ public class RegistrationService {
 
     public String saveData(RegistrationModel registrationModel) {
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setCustomerName(registrationModel.getCustomerName());
-        customerEntity.setEmail(registrationModel.getEmail());
+        customerEntity.setLoginType(registrationModel.getLoginType());
+        customerEntity.setFirstName(registrationModel.getFirstName());
+        customerEntity.setLastName(registrationModel.getLastName());
+        customerEntity.setEmailAddress(registrationModel.getEmailAddress());
+        customerEntity.setMobileNumber(registrationModel.getMobileNumber());
         customerEntity.setPassword(registrationModel.getPassword());
-        customerEntity.setMobileNum(registrationModel.getMobileNum());
+        customerEntity.setConfirmPassword(registrationModel.getConfirmPassword());
+        customerEntity.setStatus(registrationModel.getStatus());
+
 
 
         try {
