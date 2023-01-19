@@ -15,6 +15,9 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column (name= "login_Type")
+    private String loginType;
+
     @Column (name= "first_name")
     private String firstName;
 
@@ -24,7 +27,7 @@ public class CustomerEntity {
     @Column (name= "customer_email")
     private String emailAddress;
 
-    @Column (name= "mobile Num")
+    @Column (name= "mobile_Num")
     private String mobileNumber;
 
     @Column (name= "passowrd")
