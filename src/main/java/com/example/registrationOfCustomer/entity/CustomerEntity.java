@@ -15,17 +15,31 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name= "customer_name")
-    private String customerName;
+    @Column (name= "login_Type")
+    private String loginType;
+
+    @Column (name= "first_name")
+    private String firstName;
+
+    @Column (name="last_name")
+    private String lastName;
 
     @Column (name= "customer_email")
-    private String email;
+    private String emailAddress;
 
-    @Column (name= "customer_password")
+    @Column (name= "mobile_Num")
+    private String mobileNumber;
+
+    @Column (name= "passowrd")
     private String password;
 
-    @Column (name= "customer_mobileNum")
-    private String mobileNum;
+    @Column (name ="confirm_Password")
+    private String confirmPassword;
+
+    @Column (name="status")
+    private String status;
+
+
 
 
 }
