@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RegistrationService {
-//this is sample
+
     @Autowired
     private RegistrationRepository registrationRepository;
 
