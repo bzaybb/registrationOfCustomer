@@ -1,3 +1,4 @@
+
 package com.example.registrationOfCustomer.model;
 
 import lombok.Getter;
@@ -17,3 +18,4 @@ public class RegistrationModel {
     private String status;
 
 }
+

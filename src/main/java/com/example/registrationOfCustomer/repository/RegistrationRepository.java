@@ -1,3 +1,4 @@
+
 package com.example.registrationOfCustomer.repository;
 
 import com.example.registrationOfCustomer.entity.CustomerEntity;
@@ -9,3 +10,4 @@ public interface RegistrationRepository extends JpaRepository <CustomerEntity, I
 
 
 }
+

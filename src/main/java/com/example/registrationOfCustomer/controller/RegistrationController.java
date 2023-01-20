@@ -1,3 +1,4 @@
+
 package com.example.registrationOfCustomer.controller;
 
 import com.example.registrationOfCustomer.model.RegistrationModel;
@@ -18,4 +19,5 @@ public class RegistrationController {
 
 
 }
+
 
