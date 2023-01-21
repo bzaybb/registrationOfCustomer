@@ -26,7 +26,7 @@ public class RegistrationService {
                     customerEntity.setEmailAddress(registrationModel.getEmailAddress());
                 }
                 else{//if false
-                    return "Email address is not correct please use @zorbasofted.edu.com";
+                    return "Email address is not correct please use @test.com";
                 }
                 //mobile number validation
         if(validateMobileNumber(registrationModel.getMobileNumber())){
@@ -36,12 +36,19 @@ public class RegistrationService {
             return "Mobile number is not correct";
         }
 
+//validate confirmPassword with password
+        if(registrationModel.getPassword().equals(registrationModel.getConfirmPassword())){
+            customerEntity.setConfirmPassword(registrationModel.getConfirmPassword());
+        }
+        else{
+            return "Error: Passwords do not match.";
+        }
 
         if(validatePassword(registrationModel.getPassword())){
             customerEntity.setPassword(registrationModel.getPassword());
         }
         else{
-            return "Password format not correct.A password is considered valid if all the following constraints are satisfied:\n" +
+            return "Password format not correct. A password is considered valid if all the following constraints are satisfied:\n" +
                     "\n" +
                     "It contains at least 8 characters and at most 20 characters.\n" +
                     "It contains at least one digit.\n" +
@@ -52,13 +59,7 @@ public class RegistrationService {
         }
 
 
-        //validate confirmPassword with password
-        if(registrationModel.getPassword().equals(registrationModel.getConfirmPassword())){
-            customerEntity.setConfirmPassword(registrationModel.getConfirmPassword());
-        }
-        else{
-            return "Error: Passwords do not match.";
-        }
+
         customerEntity.setStatus(registrationModel.getStatus());
 
 
@@ -73,15 +74,27 @@ public class RegistrationService {
 
     //Validation Methods
 private boolean validateEmailAddress(String emailAddress){
-        if(emailAddress.contains(("@test.com"))){
-            return true;
-        }
-        else
-            return false;
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+    Pattern p = Pattern.compile(regex);
+
+    // If the password is empty
+    // return false
+    if (emailAddress == null) {
+        return false;
+    }
+
+    // Pattern class contains matcher() method
+    // to find matching between given password
+    // and regular expression.
+    Matcher m = p.matcher(emailAddress);
+
+    // Return if the password
+    // matched the ReGex
+    return m.matches();
 
 }
  private boolean validateMobileNumber(String mobileNumber){
-        if(mobileNumber.matches("\\d{9}")){
+        if(mobileNumber.matches("\\d{10}")){
             return true;
         }
         else
