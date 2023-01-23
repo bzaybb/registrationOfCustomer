@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "Dashboard_Information", schema = "customer_car_rental" )
+@Table(name = "Dashboard_Information" )
 
 public class DashboardEntity {
 
@@ -16,14 +16,17 @@ public class DashboardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name ="car_type")
+    private String carType;
+
     @Column (name= "car_Model")
     private String carModel;
 
     @Column(name = "car_Seater")
-    private int carSeater;
+    private String carSeater;
 
-    @Column(name = "bagage_Capacity")
-    private int bagageCapacity;
+    @Column(name = "baggage_Capacity")
+    private String baggageCapacity;
 
     @Column(name = "car_Registration")
     private String carRegistration;
@@ -39,6 +42,12 @@ public class DashboardEntity {
 
     @Column(name = "image_Url")
     private String imageUrl;
+
+
+    //
+    @ManyToOne
+    @JoinColumn(name = "tripType")
+    TripTypeEntity tripType;
 
 }
 
