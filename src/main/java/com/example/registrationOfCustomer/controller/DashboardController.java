@@ -43,10 +43,10 @@ public class DashboardController {
          return dashboardModel;
     }
 
-//    @GetMapping("/updateBasePriceAndStatus")
-//    public  String updatePriceAndStatus(@RequestBody DashboardModel dashboardModel ){
-//        this.dashboardService.updateDetail(dashboardModel);
-//        return "Sucess!!";
-//    }
+    @PutMapping("updateBasePriceAndStatus/{id}")
+    public String updatePriceAndStatus(@PathVariable  Integer id, @RequestBody DashboardModel dashboardModel){
+        String returnMessage = this.dashboardService.updateDetail(id,dashboardModel);
+        return returnMessage;
+    }
 
 }

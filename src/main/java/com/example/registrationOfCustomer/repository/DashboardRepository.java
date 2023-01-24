@@ -3,10 +3,10 @@ package com.example.registrationOfCustomer.repository;
 import com.example.registrationOfCustomer.entity.DashboardEntity;
 import com.example.registrationOfCustomer.entity.TripTypeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DashboardRepository extends JpaRepository<DashboardEntity,Integer> {
@@ -16,7 +16,7 @@ public interface DashboardRepository extends JpaRepository<DashboardEntity,Integ
 //@Query("SELECT p FROM DashboardEntity p where p.tripType =:tripType")
 List<DashboardEntity> findByTripType(TripTypeEntity tripTypeEntity);
 
-//DashboardEntity findById(DashboardEntity dashboardEntity);
+Optional<DashboardEntity> findById(Integer id);
 
 
 

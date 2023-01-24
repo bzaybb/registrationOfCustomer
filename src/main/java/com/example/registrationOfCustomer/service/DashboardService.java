@@ -313,6 +313,21 @@ public class DashboardService {
 
     }
 
+//    public String updateDetail(Integer id, int basePrice,String status) {
+public String updateDetail(Integer id,DashboardModel dashboardModel) {
 
+    // DashboardEntity dashboardEntity2 = new DashboardEntity();
+        //find an entity by id
+      DashboardEntity dashboardEntity1 = dashboardRepository.findById(id).get();
+       // DashboardModel dashboardModel1 = new DashboardModel();
+      //update entity information
+        dashboardEntity1.setBasePrice(dashboardModel.getBasePrice());
+        dashboardEntity1.setStatus(dashboardModel.getStatus());
+
+        //save
+        dashboardRepository.save(dashboardEntity1);
+
+        return  "update";
+    }
 }
 
