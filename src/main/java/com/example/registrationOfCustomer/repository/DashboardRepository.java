@@ -16,6 +16,8 @@ public interface DashboardRepository extends JpaRepository<DashboardEntity,Integ
 //@Query("SELECT p FROM DashboardEntity p where p.tripType =:tripType")
 List<DashboardEntity> findByTripType(TripTypeEntity tripTypeEntity);
 
+//DashboardEntity findById(DashboardEntity dashboardEntity);
+
 
 
 }

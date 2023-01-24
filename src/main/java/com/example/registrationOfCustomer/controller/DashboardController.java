@@ -20,11 +20,11 @@ public class DashboardController {
 
 
     //saving data to database
-    @PostMapping("/saveData")
-    public String save(@RequestBody DashboardModel dashboardModel) {
-        String returnMessage = this.dashboardService.saveDashBoardData(dashboardModel);
-        return returnMessage;
-    }
+//    @PostMapping("/saveData")
+//    public String save(@RequestBody DashboardModel dashboardModel) {
+//        String returnMessage = this.dashboardService.saveDashBoardData(dashboardModel);
+//        return returnMessage;
+//    }
 
     //for trip type List<DashBoardModel> dashboardModel) for multiple record at same time
     @PostMapping("/saveTripType")
@@ -43,11 +43,10 @@ public class DashboardController {
          return dashboardModel;
     }
 
-
-
-
-
-
-
+//    @GetMapping("/updateBasePriceAndStatus")
+//    public  String updatePriceAndStatus(@RequestBody DashboardModel dashboardModel ){
+//        this.dashboardService.updateDetail(dashboardModel);
+//        return "Sucess!!";
+//    }
 
 }
