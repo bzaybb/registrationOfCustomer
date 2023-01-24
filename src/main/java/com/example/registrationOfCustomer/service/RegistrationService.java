@@ -1,6 +1,7 @@
 package com.example.registrationOfCustomer.service;
 
 import com.example.registrationOfCustomer.entity.CustomerEntity;
+import com.example.registrationOfCustomer.entity.LoginEntity;
 import com.example.registrationOfCustomer.model.RegistrationModel;
 import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import org.apache.catalina.valves.rewrite.InternalRewriteMap;
@@ -19,6 +20,14 @@ public class RegistrationService {
         customerEntity.setLoginType(registrationModel.getLoginType());
         customerEntity.setFirstName(registrationModel.getFirstName());
         customerEntity.setLastName(registrationModel.getLastName());
+
+        //Login
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setLoginType(registrationModel.getLoginType());
+        loginEntity.setEmailAddress(registrationModel.getEmailAddress());
+        loginEntity.setPassword(registrationModel.getPassword());
+        // setting login entity to the customer entity
+        loginEntity.setCustomerEntity(customerEntity);
 
         //email validation
 

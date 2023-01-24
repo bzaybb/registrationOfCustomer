@@ -14,6 +14,7 @@ public class RegistrationController {
     public String customer (@RequestBody RegistrationModel registrationModel){
       this.registrationService.saveData(registrationModel);
       return "Customer registration success";
+
     }
 
 
