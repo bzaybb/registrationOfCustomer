@@ -1,0 +1,168 @@
+Customer Json details:
+--------------------
+Customer-Login:
+-------------
+
+{
+	"loginType": "customer-login",
+	"emailAddress": "xyz@test.com",
+	"passowrd": "encrypted String"
+}
+
+
+
+Customer-registration:
+----------------------
+{
+	"loginType": "customer-login",
+	"firstName": "DEF",
+	"lastName": "tuytt",
+	"emailAddress": "xyz@test.com",
+	"mobileNumber": 908765433,
+	"passowrd": "cust_123",
+	"confirmPassword": "cust_123",
+	"status": "A"
+}
+
+Customer-dashboard:
+-------------------
+{
+	"local": [{
+		"carType": "sedan",
+		"carModel": "Etios",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA3234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$4",
+		"status": "Available",
+		"imageUrl": "abc.jpg"
+	}, {
+		"carType": "SUV",
+		"carModel": "Innova",
+		"carSeater": "5-seater",
+		"bagageCapacity": "3-bags",
+		"carRegistration": "KA4234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$8",
+		"status": "Available",
+		"imageUrl": "rtc.jpg"
+	}, {
+		"carType": "Hatchback",
+		"carModel": "Swift",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA7834RT",
+		"carACorNonAc": "nonAC",
+		"basePrice": "$3",
+		"status": "Available",
+		"imageUrl": "tre.jpg"
+	}],
+	"oneWay": [{
+		"carType": "sedan",
+		"carModel": "Etios",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA3234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$4",
+		"status": "Available",
+		"imageUrl": "abc.jpg"
+	}, {
+		"carType": "SUV",
+		"carModel": "Innova",
+		"carSeater": "5-seater",
+		"bagageCapacity": "3-bags",
+		"carRegistration": "KA4234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$8",
+		"status": "Available",
+		"imageUrl": "rtc.jpg"
+	}, {
+		"carType": "Hatchback",
+		"carModel": "Swift",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA7834RT",
+		"carACorNonAc": "nonAC",
+		"basePrice": "$3",
+		"status": "Available",
+		"imageUrl": "tre.jpg"
+	}],
+	"roundTrip": [{
+		"carType": "sedan",
+		"carModel": "Etios",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA3234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$4",
+		"status": "Available",
+		"imageUrl": "abc.jpg"
+	}, {
+		"carType": "SUV",
+		"carModel": "Innova",
+		"carSeater": "5-seater",
+		"bagageCapacity": "3-bags",
+		"carRegistration": "KA4234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$8",
+		"status": "Available",
+		"imageUrl": "rtc.jpg"
+	}, {
+		"carType": "Hatchback",
+		"carModel": "Swift",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA7834RT",
+		"carACorNonAc": "nonAC",
+		"basePrice": "$3",
+		"status": "Available",
+		"imageUrl": "tre.jpg"
+	}],
+	"airport": [{
+		"carType": "sedan",
+		"carModel": "Etios",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA3234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$4",
+		"status": "Available",
+		"imageUrl": "abc.jpg"
+	}, {
+		"carType": "SUV",
+		"carModel": "Innova",
+		"carSeater": "5-seater",
+		"bagageCapacity": "3-bags",
+		"carRegistration": "KA4234RT",
+		"carACorNonAc": "AC",
+		"basePrice": "$8",
+		"status": "Available",
+		"imageUrl": "rtc.jpg"
+	}, {
+		"carType": "Hatchback",
+		"carModel": "Swift",
+		"carSeater": "4-seater",
+		"bagageCapacity": "2-bags",
+		"carRegistration": "KA7834RT",
+		"carACorNonAc": "nonAC",
+		"basePrice": "$3",
+		"status": "Available",
+		"imageUrl": "tre.jpg"
+	}]
+}
+
+
+Cistomer-billing info:
+----------------------
+{
+	"billing": {
+		"carType": "SUV",
+		"carModel": "Innova",
+		"durationInHours": "30 hrs",
+		"totalPrice": "$450",
+		"type": "local",
+		"localtion": "NY"
+	}
+}
