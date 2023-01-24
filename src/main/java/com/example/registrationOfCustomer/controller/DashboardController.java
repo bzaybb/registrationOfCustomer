@@ -49,4 +49,10 @@ public class DashboardController {
         return returnMessage;
     }
 
+    @DeleteMapping("delete/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+       String returnMessage= dashboardService.deleteById(id);
+       return returnMessage;
+    }
+
 }

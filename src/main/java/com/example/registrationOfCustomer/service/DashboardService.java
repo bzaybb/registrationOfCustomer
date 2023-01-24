@@ -329,5 +329,10 @@ public String updateDetail(Integer id,DashboardModel dashboardModel) {
 
         return  "update";
     }
+
+    public String deleteById(int id) {
+        dashboardRepository.deleteById(id);
+        return "deleted";
+    }
 }
 

@@ -18,6 +18,8 @@ List<DashboardEntity> findByTripType(TripTypeEntity tripTypeEntity);
 
 Optional<DashboardEntity> findById(Integer id);
 
+//void deleteById(Integer id);
+
 
 
 }
