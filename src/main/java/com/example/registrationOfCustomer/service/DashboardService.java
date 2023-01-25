@@ -2,6 +2,9 @@ package com.example.registrationOfCustomer.service;
 
 import com.example.registrationOfCustomer.entity.DashboardEntity;
 import com.example.registrationOfCustomer.entity.TripTypeEntity;
+import com.example.registrationOfCustomer.exception.CarTypeOrCarModelNotFoundException;
+import com.example.registrationOfCustomer.exception.RegistrationNotFoundException;
+import com.example.registrationOfCustomer.exception.TripTypeNotFoundException;
 import com.example.registrationOfCustomer.model.DashboardModel;
 import com.example.registrationOfCustomer.model.TripTypeModel;
 import com.example.registrationOfCustomer.repository.DashboardRepository;
@@ -11,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DashboardService {
@@ -23,16 +25,18 @@ public class DashboardService {
     DashboardEntity dashboardEntity = new DashboardEntity();
     DashboardModel dashboardModel;
 
+    TripTypeNotFoundException tripTypeNotFoundException;
+    CarTypeOrCarModelNotFoundException carTypeOrCarModelNotFoundException;
+    RegistrationNotFoundException registrationNotFoundException;
 
     //while validation if i put list of object at same time it doesnot work
     //if i put null on 2 method then it doenot work it gives me one error
     //it checks one condition at time but also at same time trip type table data will be save either the condition fails
-    public String saveTripType(TripTypeModel tripTypeModel) {
+    public String saveTripType(TripTypeModel tripTypeModel) throws Exception {
         List<DashboardModel> local = tripTypeModel.getLocal();
         List<DashboardModel> oneWay = tripTypeModel.getOneWay();
         List<DashboardModel> roundTrip = tripTypeModel.getRoundTrip();
         List<DashboardModel> airport = tripTypeModel.getAirport();
-        System.out.println("going inside local");
         if (local != null) {
             TripTypeEntity tripTypeEntity = new TripTypeEntity();
             tripTypeEntity.setTripType("local");
@@ -52,7 +56,7 @@ public class DashboardService {
                 if(carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
                 }else {
-                    return "carType cannot be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
 
                 }
 
@@ -61,14 +65,14 @@ public class DashboardService {
                 dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
                  }
                 else {
-                    return "car registration number is in correct";
+                    throw  new RegistrationNotFoundException();
                 }
 
                 //validation carModel
                 if(carModelValidation(dashboardModel1.getCarModel())){
                 dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
                 else {
-                    return "carModel cant be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
                 }
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
                 dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
@@ -86,10 +90,6 @@ public class DashboardService {
 
             }
 
-
-        }else
-        {
-            System.out.println();
         }
 
 
@@ -97,13 +97,8 @@ public class DashboardService {
         if ((oneWay != null)) {
 
             TripTypeEntity tripTypeEntity = new TripTypeEntity();
-            tripTypeEntity.setTripType("oneway");
-            try {
-                tripRepository.save(tripTypeEntity);
+            tripTypeEntity.setTripType("oneWay");
 
-            } catch (Exception e) {
-                System.err.println("Error Details ::" + e.getMessage());
-            }
             //saving in dashboard
             for (DashboardModel dashboardModel1 : oneWay) {
                 DashboardEntity dashboardEntity1 = new DashboardEntity();
@@ -113,7 +108,7 @@ public class DashboardService {
                 if(carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
                 }else {
-                    return "carType cannot be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
 
                 }
                 //carRegistrationValidation
@@ -121,13 +116,13 @@ public class DashboardService {
                     dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
                 }
                 else {
-                    return "car registration number is in correct";
+                    throw  new RegistrationNotFoundException();
                 }
                 //validation carModel
                 if(carModelValidation(dashboardModel1.getCarModel())){
                     dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
                 else {
-                    return "carModel cant be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
                 }
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
                 dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
@@ -135,6 +130,12 @@ public class DashboardService {
                 dashboardEntity1.setCarACorNonAc(dashboardModel1.getCarACorNonAc());
                 dashboardEntity1.setCarSeater(dashboardModel1.getCarSeater());
                 dashboardEntity1.setBaggageCapacity(dashboardModel1.getBaggageCapacity());
+                try {
+                    tripRepository.save(tripTypeEntity);
+
+                } catch (Exception e) {
+                    System.err.println("Error Details ::" + e.getMessage());
+                }
                 try {
                     dashboardRepository.save(dashboardEntity1);
 
@@ -170,7 +171,7 @@ public class DashboardService {
                 if(carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
                 }else {
-                    return "carType cannot be null";
+                throw  new CarTypeOrCarModelNotFoundException();
 
                 }
                 //carRegistrationValidation
@@ -178,13 +179,13 @@ public class DashboardService {
                     dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
                 }
                 else {
-                    return "car registration number is in correct";
+                    throw  new RegistrationNotFoundException();
                 }
                 //validation carModel
                 if(carModelValidation(dashboardModel1.getCarModel())){
                     dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
                 else {
-                    return "carModel cant be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
                 }
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
                 dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
@@ -194,7 +195,10 @@ public class DashboardService {
                 try {
                     dashboardRepository.save(dashboardEntity1);
 
-                } catch (Exception e) {
+                }
+
+                catch
+                (Exception e) {
                     System.err.println("Error Details ::" + e.getMessage());
 
                 }
@@ -226,7 +230,7 @@ public class DashboardService {
                 if(carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
                 }else {
-                    return "carType cannot be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
 
                 }
                 //carRegistrationValidation
@@ -234,13 +238,13 @@ public class DashboardService {
                     dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
                 }
                 else {
-                    return "car registration number is in correct";
+                    throw  new RegistrationNotFoundException();
                 }
                 //validation carModel
                 if(carModelValidation(dashboardModel1.getCarModel())){
                     dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
                 else {
-                    return "carModel cant be null";
+                    throw  new CarTypeOrCarModelNotFoundException();
                 }
 
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
@@ -264,6 +268,7 @@ public class DashboardService {
 
         return  "saved in database";
     }
+
 
     public  boolean carTypeValidation(String carType){
         if(carType!=null && !carType.isEmpty()){
@@ -305,7 +310,13 @@ public class DashboardService {
                     dashboardModel1.setCarRegistration(dash.getCarRegistration());
                     dashboardModel1.setCarACorNonAc(dash.getCarACorNonAc());
                     dashboardModel1.setCarSeater(dash.getCarSeater());
+
+                    //i want display along with triptype
+                    //tripTypeEntity.setTripType(tripType);
+
+
                     dashboardModel.add(dashboardModel1);
+
 
                 }
             }
@@ -313,20 +324,16 @@ public class DashboardService {
 
     }
 
-//    public String updateDetail(Integer id, int basePrice,String status) {
-public String updateDetail(Integer id,DashboardModel dashboardModel) {
 
-    // DashboardEntity dashboardEntity2 = new DashboardEntity();
+    public String updateDetail(Integer id,DashboardModel dashboardModel) {
         //find an entity by id
       DashboardEntity dashboardEntity1 = dashboardRepository.findById(id).get();
-       // DashboardModel dashboardModel1 = new DashboardModel();
       //update entity information
         dashboardEntity1.setBasePrice(dashboardModel.getBasePrice());
         dashboardEntity1.setStatus(dashboardModel.getStatus());
 
         //save
         dashboardRepository.save(dashboardEntity1);
-
         return  "update";
     }
 
