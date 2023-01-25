@@ -3,6 +3,7 @@ package com.example.registrationOfCustomer.service;
 import com.example.registrationOfCustomer.entity.CustomerEntity;
 import com.example.registrationOfCustomer.entity.LoginEntity;
 import com.example.registrationOfCustomer.model.RegistrationModel;
+import com.example.registrationOfCustomer.repository.LoginRepository;
 import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import org.apache.catalina.valves.rewrite.InternalRewriteMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,18 @@ public class RegistrationService {
 
     @Autowired
     private RegistrationRepository registrationRepository;
+    @Autowired
+    private LoginRepository loginRepository;
 
     public String saveData(RegistrationModel registrationModel) {
         CustomerEntity customerEntity = new CustomerEntity();
+        LoginEntity loginEntity = new LoginEntity();
         customerEntity.setLoginType(registrationModel.getLoginType());
         customerEntity.setFirstName(registrationModel.getFirstName());
         customerEntity.setLastName(registrationModel.getLastName());
 
         //Login
-        LoginEntity loginEntity = new LoginEntity();
+
         loginEntity.setLoginType(registrationModel.getLoginType());
         loginEntity.setEmailAddress(registrationModel.getEmailAddress());
         loginEntity.setPassword(registrationModel.getPassword());
@@ -74,7 +78,8 @@ public class RegistrationService {
 
 
         try {
-            registrationRepository.save(customerEntity);
+            loginRepository.save(loginEntity);
+
         } catch (Exception e) {
             System.err.println("Error Details ::" + e.getMessage());
         }

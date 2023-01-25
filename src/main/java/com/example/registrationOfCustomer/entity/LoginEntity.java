@@ -25,7 +25,8 @@ public class LoginEntity {
     private String password;
 
     // Maping customer entity with login entity
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name="cust_id")
     private CustomerEntity customerEntity;
 
 
