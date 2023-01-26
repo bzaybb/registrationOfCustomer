@@ -37,42 +37,49 @@ public class DashboardService {
         List<DashboardModel> oneWay = tripTypeModel.getOneWay();
         List<DashboardModel> roundTrip = tripTypeModel.getRoundTrip();
         List<DashboardModel> airport = tripTypeModel.getAirport();
-        if (local != null) {
-            TripTypeEntity tripTypeEntity = new TripTypeEntity();
-            tripTypeEntity.setTripType("local");
-            try {
-                tripRepository.save(tripTypeEntity);
+        TripTypeEntity tripTypeEntity = null;
 
-            } catch (Exception e) {
-                System.err.println("Error Details ::" + e.getMessage());
+
+        if (local != null) {
+            //fetch
+            tripTypeEntity = tripRepository.findByTripType("local");
+            if (tripTypeEntity == null) {
+                tripTypeEntity = new TripTypeEntity();
+
+                tripTypeEntity.setTripType("local");
+                try {
+                    tripRepository.save(tripTypeEntity);
+
+                } catch (Exception e) {
+                    System.err.println("Error Details ::" + e.getMessage());
+                }
             }
             //saving in dashboard
             for (DashboardModel dashboardModel1 : local) {
                 DashboardEntity dashboardEntity1 = new DashboardEntity();
                 dashboardEntity1.setImageUrl(dashboardModel1.getImageUrl());
-                dashboardEntity1.setTripType(tripTypeEntity);
+                dashboardEntity1.setTripType(tripTypeEntity);   //
 
                 //carType validation
-                if(carTypeValidation(dashboardModel1.getCarType())) {
+                if (carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
-                }else {
-                    throw  new CarTypeOrCarModelNotFoundException();
+                } else {
+                    throw new CarTypeOrCarModelNotFoundException();
 
                 }
 
                 //carRegistrationValidation
-                if(carRegistrationValidation(dashboardModel1.getCarRegistration())){
-                dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
-                 }
-                else {
-                    throw  new RegistrationNotFoundException();
+                if (carRegistrationValidation(dashboardModel1.getCarRegistration())) {
+                    dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
+                } else {
+                    throw new RegistrationNotFoundException();
                 }
 
                 //validation carModel
-                if(carModelValidation(dashboardModel1.getCarModel())){
-                dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
-                else {
-                    throw  new CarTypeOrCarModelNotFoundException();
+                if (carModelValidation(dashboardModel1.getCarModel())) {
+                    dashboardEntity1.setCarModel(dashboardModel1.getCarModel());
+                } else {
+                    throw new CarTypeOrCarModelNotFoundException();
                 }
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
                 dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
@@ -93,11 +100,20 @@ public class DashboardService {
         }
 
 
-
         if ((oneWay != null)) {
 
-            TripTypeEntity tripTypeEntity = new TripTypeEntity();
-            tripTypeEntity.setTripType("oneWay");
+            tripTypeEntity = tripRepository.findByTripType("oneWay");
+            if (tripTypeEntity == null) {
+                tripTypeEntity = new TripTypeEntity();
+
+                tripTypeEntity.setTripType("oneWay");
+                try {
+                    tripRepository.save(tripTypeEntity);
+
+                } catch (Exception e) {
+                    System.err.println("Error Details ::" + e.getMessage());
+                }
+            }
 
             //saving in dashboard
             for (DashboardModel dashboardModel1 : oneWay) {
@@ -105,24 +121,23 @@ public class DashboardService {
                 dashboardEntity1.setImageUrl(dashboardModel1.getImageUrl());
                 dashboardEntity1.setTripType(tripTypeEntity);
                 //carType validation
-                if(carTypeValidation(dashboardModel1.getCarType())) {
+                if (carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
-                }else {
-                    throw  new CarTypeOrCarModelNotFoundException();
+                } else {
+                    throw new CarTypeOrCarModelNotFoundException();
 
                 }
                 //carRegistrationValidation
-                if(carRegistrationValidation(dashboardModel1.getCarRegistration())){
+                if (carRegistrationValidation(dashboardModel1.getCarRegistration())) {
                     dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
-                }
-                else {
-                    throw  new RegistrationNotFoundException();
+                } else {
+                    throw new RegistrationNotFoundException();
                 }
                 //validation carModel
-                if(carModelValidation(dashboardModel1.getCarModel())){
-                    dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
-                else {
-                    throw  new CarTypeOrCarModelNotFoundException();
+                if (carModelValidation(dashboardModel1.getCarModel())) {
+                    dashboardEntity1.setCarModel(dashboardModel1.getCarModel());
+                } else {
+                    throw new CarTypeOrCarModelNotFoundException();
                 }
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
                 dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
@@ -130,12 +145,8 @@ public class DashboardService {
                 dashboardEntity1.setCarACorNonAc(dashboardModel1.getCarACorNonAc());
                 dashboardEntity1.setCarSeater(dashboardModel1.getCarSeater());
                 dashboardEntity1.setBaggageCapacity(dashboardModel1.getBaggageCapacity());
-                try {
-                    tripRepository.save(tripTypeEntity);
 
-                } catch (Exception e) {
-                    System.err.println("Error Details ::" + e.getMessage());
-                }
+
                 try {
                     dashboardRepository.save(dashboardEntity1);
 
@@ -150,17 +161,19 @@ public class DashboardService {
         }
 
 
-
-
         if ((roundTrip != null)) {
 
-            TripTypeEntity tripTypeEntity = new TripTypeEntity();
-            tripTypeEntity.setTripType("roundTrip");
-            try {
-                tripRepository.save(tripTypeEntity);
+            tripTypeEntity = tripRepository.findByTripType("roundTrip");
+            if (tripTypeEntity == null) {
+                tripTypeEntity = new TripTypeEntity();
 
-            } catch (Exception e) {
-                System.err.println("Error Details ::" + e.getMessage());
+                tripTypeEntity.setTripType("roundTrip");
+                try {
+                    tripRepository.save(tripTypeEntity);
+
+                } catch (Exception e) {
+                    System.err.println("Error Details ::" + e.getMessage());
+                }
             }
             //saving in dashboard
             for (DashboardModel dashboardModel1 : roundTrip) {
@@ -168,24 +181,23 @@ public class DashboardService {
                 dashboardEntity1.setImageUrl(dashboardModel1.getImageUrl());
                 dashboardEntity1.setTripType(tripTypeEntity);
                 //carType validation
-                if(carTypeValidation(dashboardModel1.getCarType())) {
+                if (carTypeValidation(dashboardModel1.getCarType())) {
                     dashboardEntity1.setCarType(dashboardModel1.getCarType());
-                }else {
-                throw  new CarTypeOrCarModelNotFoundException();
+                } else {
+                    throw new CarTypeOrCarModelNotFoundException();
 
                 }
                 //carRegistrationValidation
-                if(carRegistrationValidation(dashboardModel1.getCarRegistration())){
+                if (carRegistrationValidation(dashboardModel1.getCarRegistration())) {
                     dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
-                }
-                else {
-                    throw  new RegistrationNotFoundException();
+                } else {
+                    throw new RegistrationNotFoundException();
                 }
                 //validation carModel
-                if(carModelValidation(dashboardModel1.getCarModel())){
-                    dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
-                else {
-                    throw  new CarTypeOrCarModelNotFoundException();
+                if (carModelValidation(dashboardModel1.getCarModel())) {
+                    dashboardEntity1.setCarModel(dashboardModel1.getCarModel());
+                } else {
+                    throw new CarTypeOrCarModelNotFoundException();
                 }
                 dashboardEntity1.setStatus(dashboardModel1.getStatus());
                 dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
@@ -195,9 +207,7 @@ public class DashboardService {
                 try {
                     dashboardRepository.save(dashboardEntity1);
 
-                }
-
-                catch
+                } catch
                 (Exception e) {
                     System.err.println("Error Details ::" + e.getMessage());
 
@@ -205,68 +215,69 @@ public class DashboardService {
 
             }
 
-
         }
+            if ((airport != null)) {
+                tripTypeEntity = tripRepository.findByTripType("airport");
+                if (tripTypeEntity == null) {
+                    tripTypeEntity = new TripTypeEntity();
+
+                    tripTypeEntity.setTripType("airport");
+                    try {
+                        tripRepository.save(tripTypeEntity);
+
+                    } catch (Exception e) {
+                        System.err.println("Error Details ::" + e.getMessage());
+                    }
+
+                }
+                //saving in dashboard
+                for (DashboardModel dashboardModel1 : airport) {
+                    DashboardEntity dashboardEntity1 = new DashboardEntity();
+                    dashboardEntity1.setImageUrl(dashboardModel1.getImageUrl());
+                    dashboardEntity1.setTripType(tripTypeEntity);
+
+                    //carType validation
+                    if (carTypeValidation(dashboardModel1.getCarType())) {
+                        dashboardEntity1.setCarType(dashboardModel1.getCarType());
+                    } else {
+                        throw new CarTypeOrCarModelNotFoundException();
+
+                    }
+                    //carRegistrationValidation
+                    if (carRegistrationValidation(dashboardModel1.getCarRegistration())) {
+                        dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
+                    } else {
+                        throw new RegistrationNotFoundException();
+                    }
+                    //validation carModel
+                    if (carModelValidation(dashboardModel1.getCarModel())) {
+                        dashboardEntity1.setCarModel(dashboardModel1.getCarModel());
+                    } else {
+                        throw new CarTypeOrCarModelNotFoundException();
+                    }
+
+                    dashboardEntity1.setStatus(dashboardModel1.getStatus());
+                    dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
+                    dashboardEntity1.setCarACorNonAc(dashboardModel1.getCarACorNonAc());
+                    dashboardEntity1.setCarSeater(dashboardModel1.getCarSeater());
+                    dashboardEntity1.setBaggageCapacity(dashboardModel1.getBaggageCapacity());
+                    try {
+                        dashboardRepository.save(dashboardEntity1);
+
+                    } catch (Exception e) {
+                        System.err.println("Error Details ::" + e.getMessage());
+
+                    }
+
+                }
 
 
-
-        if ((airport != null)) {
-
-            TripTypeEntity tripTypeEntity = new TripTypeEntity();
-            tripTypeEntity.setTripType("airport");
-            try {
-                tripRepository.save(tripTypeEntity);
-
-            } catch (Exception e) {
-                System.err.println("Error Details ::" + e.getMessage());
             }
-            //saving in dashboard
-            for (DashboardModel dashboardModel1 : airport) {
-                DashboardEntity dashboardEntity1 = new DashboardEntity();
-                dashboardEntity1.setImageUrl(dashboardModel1.getImageUrl());
-                dashboardEntity1.setTripType(tripTypeEntity);
-
-                //carType validation
-                if(carTypeValidation(dashboardModel1.getCarType())) {
-                    dashboardEntity1.setCarType(dashboardModel1.getCarType());
-                }else {
-                    throw  new CarTypeOrCarModelNotFoundException();
-
-                }
-                //carRegistrationValidation
-                if(carRegistrationValidation(dashboardModel1.getCarRegistration())){
-                    dashboardEntity1.setCarRegistration(dashboardModel1.getCarRegistration());
-                }
-                else {
-                    throw  new RegistrationNotFoundException();
-                }
-                //validation carModel
-                if(carModelValidation(dashboardModel1.getCarModel())){
-                    dashboardEntity1.setCarModel(dashboardModel1.getCarModel());}
-                else {
-                    throw  new CarTypeOrCarModelNotFoundException();
-                }
-
-                dashboardEntity1.setStatus(dashboardModel1.getStatus());
-                dashboardEntity1.setBasePrice(dashboardModel1.getBasePrice());
-                dashboardEntity1.setCarACorNonAc(dashboardModel1.getCarACorNonAc());
-                dashboardEntity1.setCarSeater(dashboardModel1.getCarSeater());
-                dashboardEntity1.setBaggageCapacity(dashboardModel1.getBaggageCapacity());
-                try {
-                    dashboardRepository.save(dashboardEntity1);
-
-                } catch (Exception e) {
-                    System.err.println("Error Details ::" + e.getMessage());
-
-                }
-
-            }
 
 
-        }
 
+        return "saved in database";
 
-        return  "saved in database";
     }
 
 

@@ -11,4 +11,5 @@ public interface TripRepository extends JpaRepository<TripTypeEntity,Integer> {
 
 //@Query("SELECT t FROM TripTypeEntity  t where t.tripType=:tripType")
 TripTypeEntity findByTripType(String tripType);
+//DashboardEntity findByTrip(String tripType);
 }
