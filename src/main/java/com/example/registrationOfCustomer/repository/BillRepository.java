@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BillRepository extends JpaRepository<BillEntity, Integer> {
+    BillEntity findByCarType(String carType);
+    BillEntity findByLocation(String location);
+
+    BillEntity findByEmail(String emailAddress);
 }

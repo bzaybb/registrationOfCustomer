@@ -10,17 +10,21 @@ import javax.persistence.*;
 public class BillEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
     @Column(name = "car_type")
-    String carType;
+    private String carType;
     @Column(name = "car_model")
-    String carModel;
+    private String carModel;
     @Column(name = "duration_hours")
-    String durationHrs;
+    private String durationHrs;
     @Column(name = "total_price")
-    Double totalPrice;
+    private Double totalPrice;
     @Column(name = "trip_type")
-    String tripType;
+    private String tripType;
     @Column(name = "location")
-    String location;
+    private String location;
+
+    @OneToOne
+    @JoinColumn(name="customer_id")
+    private CustomerEntity customerEntity;
 }
