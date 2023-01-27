@@ -6,7 +6,7 @@ Customer-Login:
 {
 	"loginType": "customer-login",
 	"emailAddress": "xyz@test.com",
-	"passowrd": "encrypted String"
+	"password": "encrypted String"
 }
 
 
@@ -19,7 +19,7 @@ Customer-registration:
 	"lastName": "tuytt",
 	"emailAddress": "xyz@test.com",
 	"mobileNumber": 908765433,
-	"passowrd": "cust_123",
+	"password": "cust_123",
 	"confirmPassword": "cust_123",
 	"status": "A"
 }

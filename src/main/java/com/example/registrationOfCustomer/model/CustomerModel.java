@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegistrationModel {
+public class CustomerModel {
+
 
     private String loginType;
     private String firstName;
