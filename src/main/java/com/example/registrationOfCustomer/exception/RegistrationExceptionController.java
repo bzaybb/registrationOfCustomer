@@ -5,10 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+
+@ControllerAdvice //handles all exception
 public class RegistrationExceptionController {
-    @ExceptionHandler(value = RegistrationNotFoundException.class)
-    public ResponseEntity<Object> exception(RegistrationNotFoundException exception) {
-        return  new ResponseEntity<>("RegistrationNotFound", HttpStatus.NOT_FOUND);
+    @ExceptionHandler(value = CustomerNotFoundException.class)
+    public ResponseEntity<Object> exception(CustomerNotFoundException exception){
+        return new ResponseEntity<>("Customer Not Found", HttpStatus.NOT_FOUND);
     }
 }
