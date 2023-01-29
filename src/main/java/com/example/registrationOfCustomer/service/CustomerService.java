@@ -82,8 +82,8 @@ public class CustomerService {
 
 
         try {
-            //registrationRepository.save(customerEntity);
-            loginRepository.save(loginEntity);
+            customerRepository.save(customerEntity);
+            //loginRepository.save(loginEntity);
         } catch (Exception e) {
             System.err.println("Error Details ::" + e.getMessage());
         }
@@ -163,13 +163,21 @@ public class CustomerService {
         }
     }
 */
+   public String deleteCustomerInfo(Integer id) {
+       try {
+           customerRepository.deleteById(id);
+       } catch(Exception e) {
+           System.err.println("Error Details ::"+e.getMessage());
+       }
+       return "Success";
+   }
 
 
 
 
     //Validation Methods
 private boolean validateEmailAddress(String emailAddress){
-        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Za-z0-9.-]+$";
     Pattern p = Pattern.compile(regex);
 
     // If the password is empty

@@ -14,8 +14,6 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @Autowired
-    CustomerRepository customerRepository;
 
     @PostMapping("/customer")
     public String customer(@RequestBody CustomerModel customerModel) {
@@ -58,6 +56,12 @@ public class CustomerController {
         return "Customer deleted";
     }*/
 
+    @DeleteMapping("/deleteCustomerRecord")
+    public String deleteCustomerRecord(@RequestParam Integer custId) {
+        this.customerService.deleteCustomerInfo(custId);
+
+        return "delete Successful!!";
+    }
 
 
 

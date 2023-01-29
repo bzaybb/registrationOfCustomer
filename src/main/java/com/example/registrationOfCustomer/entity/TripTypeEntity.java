@@ -21,6 +21,8 @@ public class TripTypeEntity {
 
     @Column(name ="trip_type" )
     private String tripType;
+
+
 //
 //    @OneToMany(cascade = CascadeType.ALL)
 //    //private List<TripTypeModel> tripTypeModelList;

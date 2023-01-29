@@ -10,15 +10,16 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository <CustomerEntity, Integer>{
 
+    @Query("Select id from CustomerEntity  where emailAddress = :emailAddress")
+    Integer findByCustEmail(String emailAddress);
 
 
     @Query("Select p from CustomerEntity p where p.emailAddress = :emailAddress")
     CustomerEntity findByEmail(String emailAddress);
 
-    void deleteById(Integer id);
-    void delete(CustomerEntity entity);
 
-   /* void deleteByEmail (String emailAddress);*/
-
+    //@Query("Select id from CustomerEntity  where email = :email")
+        // to fetch vendor id and save into carTable
+    //Integer findByCustEmail(String email); // find vendor id to save in car table
 
 }
