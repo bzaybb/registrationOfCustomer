@@ -10,5 +10,7 @@ public interface LoginRepository extends JpaRepository<LoginEntity, Integer> {
     @Query("Delete from LoginEntity l where l.emailAddress = :emailAddress")
     void deleteByEmail(String emailAddress);
 
+    LoginEntity findByEmailAddress (String emailAddress);
+
 
 }
