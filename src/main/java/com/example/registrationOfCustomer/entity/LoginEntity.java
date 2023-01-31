@@ -24,10 +24,11 @@ public class LoginEntity {
     @Column (name="passowrd")
     private String password;
 
-    // Maping customer entity with login entity
-    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    /*// Maping customer entity with login entity
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY, orphanRemoval = true)
+    @MapsId
     @JoinColumn(name="cust_id")
-    private CustomerEntity customerEntity;
+    private CustomerEntity customerEntity;*/
 
 
 }

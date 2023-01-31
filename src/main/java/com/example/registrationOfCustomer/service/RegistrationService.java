@@ -1,13 +1,18 @@
 package com.example.registrationOfCustomer.service;
 
 import com.example.registrationOfCustomer.entity.CustomerEntity;
+import com.example.registrationOfCustomer.entity.CustomerRolesEntity;
 import com.example.registrationOfCustomer.entity.LoginEntity;
 import com.example.registrationOfCustomer.model.RegistrationModel;
+import com.example.registrationOfCustomer.model.CustomerRolesModel;
+import com.example.registrationOfCustomer.repository.CustomerRolesRepository;
 import com.example.registrationOfCustomer.repository.LoginRepository;
 import com.example.registrationOfCustomer.repository.RegistrationRepository;
-import org.apache.catalina.valves.rewrite.InternalRewriteMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 
 @Service
@@ -15,8 +20,11 @@ public class RegistrationService {
 
     @Autowired
     private RegistrationRepository registrationRepository;
+
     @Autowired
     private LoginRepository loginRepository;
+    @Autowired
+    private CustomerRolesRepository customerRolesRepository;
 
     public String saveData(RegistrationModel registrationModel) {
         CustomerEntity customerEntity = new CustomerEntity();
@@ -25,13 +33,16 @@ public class RegistrationService {
         customerEntity.setFirstName(registrationModel.getFirstName());
         customerEntity.setLastName(registrationModel.getLastName());
 
+
         //Login
 
         loginEntity.setLoginType(registrationModel.getLoginType());
         loginEntity.setEmailAddress(registrationModel.getEmailAddress());
         loginEntity.setPassword(registrationModel.getPassword());
         // setting login entity to the customer entity
-        loginEntity.setCustomerEntity(customerEntity);
+        //loginEntity.setCustomerEntity(customerEntity);
+        customerEntity.setLoginEntity(loginEntity);
+
 
         //email validation
 
@@ -78,17 +89,115 @@ public class RegistrationService {
 
 
         try {
-            loginRepository.save(loginEntity);
-
+            registrationRepository.save(customerEntity);
+            //loginRepository.save(loginEntity);
         } catch (Exception e) {
+            System.err.println("Error Details ::" + e.getMessage());
+        }
+        List<CustomerRolesEntity> customerRolesEntityList = new ArrayList<>();
+        List<CustomerRolesModel> customerRolesModels = registrationModel.getRole();
+        for(CustomerRolesModel customerRolesModel: customerRolesModels){
+            CustomerRolesEntity customerRolesEntity = new CustomerRolesEntity();
+            customerRolesEntity.setRoleName(customerRolesModel.getRoleName());
+            customerRolesEntity.setLoginEntity(loginEntity);
+            customerRolesEntityList.add(customerRolesEntity);
+        }
+        try{
+            customerRolesRepository.saveAll(customerRolesEntityList);
+        } catch ( Exception e){
             System.err.println("Error Details ::" + e.getMessage());
         }
         return "success!!";
     }
 
+    //Update logic
+    public String updateCustomerDetails (RegistrationModel registrationModel) {
+        //Integer id =registrationRepository.findByEmail(registrationModel.getEmailAddress()); to find id using email
+        CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
+       // CustomerEntity customerEntity = null;
+        if (customerEntity == null) {
+            return "Error: Customer not found.";
+        }
+        customerEntity.setLoginType(registrationModel.getLoginType());
+        customerEntity.setFirstName(registrationModel.getFirstName());
+        customerEntity.setLastName(registrationModel.getLastName());
+        customerEntity.setStatus(registrationModel.getStatus());
+
+
+        //validate email address
+        if (validateEmailAddress(registrationModel.getEmailAddress())) {
+            customerEntity.setEmailAddress(registrationModel.getEmailAddress());
+        } else {
+            return "Email address is not correct please use @test.com";
+        }
+
+
+
+        //validate mobile number
+        if (validateMobileNumber(registrationModel.getMobileNumber())) {
+            customerEntity.setMobileNumber(registrationModel.getMobileNumber());
+        } else {
+            return "Mobile number is not correct";
+        }
+
+        try {
+            registrationRepository.save(customerEntity);
+        } catch (Exception e) {
+            System.err.println("Error Details::" + e.getMessage());
+        }
+
+
+        return "Customer Details updated";
+    }
+
+    //Fetch Customer Details
+    public RegistrationModel fetchCustomerDetails (RegistrationModel registrationModel) {
+        CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
+        RegistrationModel registrationModel1 = new RegistrationModel();
+
+        if (customerEntity != null) {
+            registrationModel1.setLoginType(customerEntity.getLoginType());
+            registrationModel1.setFirstName(customerEntity.getFirstName());
+            registrationModel1.setLastName(customerEntity.getLastName());
+            registrationModel1.setEmailAddress(customerEntity.getEmailAddress());
+            registrationModel1.setMobileNumber(customerEntity.getMobileNumber());
+            registrationModel1.setPassword(customerEntity.getPassword());
+
+
+        }
+        return registrationModel1;
+    }
+
+   /* //Delete method
+    public String deleteCustomerDetails(RegistrationModel customerModel){
+        CustomerEntity customerEntity = registrationRepository.findByEmail(customerModel.getEmailAddress());
+        if(customerEntity != null) {
+            // Delete the associated LoginEntity
+            loginRepository.deleteByEmail(customerEntity.getEmailAddress());
+            // Delete the customer
+            registrationRepository.delete(customerEntity);
+            return "Customer deleted successfully.";
+        } else {
+            // Customer not found
+            return "Customer not found.";
+        }
+    }
+*/
+   public String deleteCustomerInfo(Integer id) {
+       try {
+           registrationRepository.deleteById(id);
+       } catch(Exception e) {
+           System.err.println("Error Details ::"+e.getMessage());
+       }
+       return "Success";
+   }
+
+
+
+
     //Validation Methods
 private boolean validateEmailAddress(String emailAddress){
-        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Za-z0-9.-]+$";
     Pattern p = Pattern.compile(regex);
 
     // If the password is empty

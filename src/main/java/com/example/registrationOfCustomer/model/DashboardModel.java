@@ -8,9 +8,11 @@ import lombok.Setter;
 
 public class DashboardModel {
 
+    //private String tripType;
+    private  String carType;
     private String carModel;
-    private int carSeater;
-    private int bagageCapacity;
+    private String carSeater;
+    private String baggageCapacity;
     private String carRegistration;
     private String carACorNonAc;
     private int basePrice;

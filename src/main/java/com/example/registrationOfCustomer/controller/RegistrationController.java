@@ -10,12 +10,57 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
-    @PostMapping("/customer")
-    public String customer (@RequestBody RegistrationModel registrationModel){
-      this.registrationService.saveData(registrationModel);
-      return "Customer registration success";
 
+
+    @PostMapping("/customer")
+    public String customer(@RequestBody RegistrationModel registrationModel) {
+        this.registrationService.saveData(registrationModel);
+        return "Customer registration success";
     }
+
+    @PutMapping("/updateCustomer")
+    public String updateCustomer(@RequestBody RegistrationModel registrationModel) {
+        /*Integer id = registrationModel.getId();
+        Optional<CustomerEntity> customerEntity = this.customerRepository.findById(id);
+        if (customerEntity==null){
+            throw new CustomerNotFoundException();
+        }*/
+
+        this.registrationService.updateCustomerDetails(registrationModel);
+        return "Customer Detail is updated";
+    }
+
+    @GetMapping("/fecthCustomer")
+    public RegistrationModel fetchCustomer(@RequestBody RegistrationModel registrationModel){
+
+        RegistrationModel registrationModel1 = this.registrationService.fetchCustomerDetails(registrationModel);
+        return registrationModel1;
+    }
+
+   /* @DeleteMapping("/{email}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable RegistrationModel email) {
+        String result = registrationService.deleteCustomerDetails(email);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
+        }
+    }*/
+
+   /* @DeleteMapping("/deleteCustomer")
+    public String deleteCustomer(@RequestBody RegistrationModel customerModel){
+        this.registrationService.deleteCustomerDetails(customerModel);
+        return "Customer deleted";
+    }*/
+
+    @DeleteMapping("/deleteCustomerRecord")
+    public String deleteCustomerRecord(@RequestParam Integer custId) {
+        this.registrationService.deleteCustomerInfo(custId);
+
+        return "delete Successful!!";
+    }
+
+
 
 }
 
