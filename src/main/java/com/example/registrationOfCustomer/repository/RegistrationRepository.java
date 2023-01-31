@@ -5,10 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface CustomerRepository extends JpaRepository <CustomerEntity, Integer>{
+public interface RegistrationRepository extends JpaRepository <CustomerEntity, Integer>{
 
     @Query("Select id from CustomerEntity  where emailAddress = :emailAddress")
     Integer findByCustEmail(String emailAddress);

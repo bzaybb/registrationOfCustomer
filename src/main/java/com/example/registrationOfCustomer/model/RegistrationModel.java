@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CustomerModel {
+public class RegistrationModel {
 
 
     private String loginType;

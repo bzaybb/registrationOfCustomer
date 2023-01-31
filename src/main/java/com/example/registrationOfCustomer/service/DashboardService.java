@@ -7,7 +7,7 @@ import com.example.registrationOfCustomer.exception.RegistrationNotFoundExceptio
 import com.example.registrationOfCustomer.exception.TripTypeNotFoundException;
 import com.example.registrationOfCustomer.model.DashboardModel;
 import com.example.registrationOfCustomer.model.TripTypeModel;
-import com.example.registrationOfCustomer.repository.CustomerRepository;
+import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import com.example.registrationOfCustomer.repository.DashboardRepository;
 import com.example.registrationOfCustomer.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class DashboardService {
     TripRepository tripRepository;
 
     @Autowired
-            CustomerRepository customerRepository;
+    RegistrationRepository registrationRepository;
 
     DashboardEntity dashboardEntity = new DashboardEntity();
     DashboardModel dashboardModel;
@@ -38,7 +38,7 @@ public class DashboardService {
     //if i put null on 2 method then it doenot work it gives me one error
     //it checks one condition at time but also at same time trip type table data will be save either the condition fails
     public String saveTripType(TripTypeModel tripTypeModel) throws Exception {
-        Integer customerId = this.customerRepository.findByCustEmail("xyz@test.com");
+        Integer customerId = this.registrationRepository.findByCustEmail("xyz@test.com");
         List<DashboardModel> local = tripTypeModel.getLocal();
         List<DashboardModel> oneWay = tripTypeModel.getOneWay();
         List<DashboardModel> roundTrip = tripTypeModel.getRoundTrip();

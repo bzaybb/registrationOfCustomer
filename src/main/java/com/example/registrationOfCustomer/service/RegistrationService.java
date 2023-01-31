@@ -3,11 +3,11 @@ package com.example.registrationOfCustomer.service;
 import com.example.registrationOfCustomer.entity.CustomerEntity;
 import com.example.registrationOfCustomer.entity.CustomerRolesEntity;
 import com.example.registrationOfCustomer.entity.LoginEntity;
-import com.example.registrationOfCustomer.model.CustomerModel;
+import com.example.registrationOfCustomer.model.RegistrationModel;
 import com.example.registrationOfCustomer.model.CustomerRolesModel;
 import com.example.registrationOfCustomer.repository.CustomerRolesRepository;
 import com.example.registrationOfCustomer.repository.LoginRepository;
-import com.example.registrationOfCustomer.repository.CustomerRepository;
+import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,29 +16,29 @@ import java.util.List;
 import java.util.regex.*;
 
 @Service
-public class CustomerService {
+public class RegistrationService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private RegistrationRepository registrationRepository;
 
     @Autowired
     private LoginRepository loginRepository;
     @Autowired
     private CustomerRolesRepository customerRolesRepository;
 
-    public String saveData(CustomerModel customerModel) {
+    public String saveData(RegistrationModel registrationModel) {
         CustomerEntity customerEntity = new CustomerEntity();
         LoginEntity loginEntity = new LoginEntity();
-        customerEntity.setLoginType(customerModel.getLoginType());
-        customerEntity.setFirstName(customerModel.getFirstName());
-        customerEntity.setLastName(customerModel.getLastName());
+        customerEntity.setLoginType(registrationModel.getLoginType());
+        customerEntity.setFirstName(registrationModel.getFirstName());
+        customerEntity.setLastName(registrationModel.getLastName());
 
 
         //Login
 
-        loginEntity.setLoginType(customerModel.getLoginType());
-        loginEntity.setEmailAddress(customerModel.getEmailAddress());
-        loginEntity.setPassword(customerModel.getPassword());
+        loginEntity.setLoginType(registrationModel.getLoginType());
+        loginEntity.setEmailAddress(registrationModel.getEmailAddress());
+        loginEntity.setPassword(registrationModel.getPassword());
         // setting login entity to the customer entity
         //loginEntity.setCustomerEntity(customerEntity);
         customerEntity.setLoginEntity(loginEntity);
@@ -46,30 +46,30 @@ public class CustomerService {
 
         //email validation
 
-                if(validateEmailAddress(customerModel.getEmailAddress())){//calling validating method to check if true or false
-                    customerEntity.setEmailAddress(customerModel.getEmailAddress());
+                if(validateEmailAddress(registrationModel.getEmailAddress())){//calling validating method to check if true or false
+                    customerEntity.setEmailAddress(registrationModel.getEmailAddress());
                 }
                 else{//if false
                     return "Email address is not correct please use @test.com";
                 }
                 //mobile number validation
-        if(validateMobileNumber(customerModel.getMobileNumber())){
-            customerEntity.setMobileNumber(customerModel.getMobileNumber());
+        if(validateMobileNumber(registrationModel.getMobileNumber())){
+            customerEntity.setMobileNumber(registrationModel.getMobileNumber());
         }
         else{
             return "Mobile number is not correct";
         }
 
 //validate confirmPassword with password
-        if(customerModel.getPassword().equals(customerModel.getConfirmPassword())){
-            customerEntity.setConfirmPassword(customerModel.getConfirmPassword());
+        if(registrationModel.getPassword().equals(registrationModel.getConfirmPassword())){
+            customerEntity.setConfirmPassword(registrationModel.getConfirmPassword());
         }
         else{
             return "Error: Passwords do not match.";
         }
 
-        if(validatePassword(customerModel.getPassword())){
-            customerEntity.setPassword(customerModel.getPassword());
+        if(validatePassword(registrationModel.getPassword())){
+            customerEntity.setPassword(registrationModel.getPassword());
         }
         else{
             return "Password format not correct. A password is considered valid if all the following constraints are satisfied:\n" +
@@ -84,18 +84,18 @@ public class CustomerService {
 
 
 
-        customerEntity.setStatus(customerModel.getStatus());
+        customerEntity.setStatus(registrationModel.getStatus());
 
 
 
         try {
-            customerRepository.save(customerEntity);
+            registrationRepository.save(customerEntity);
             //loginRepository.save(loginEntity);
         } catch (Exception e) {
             System.err.println("Error Details ::" + e.getMessage());
         }
         List<CustomerRolesEntity> customerRolesEntityList = new ArrayList<>();
-        List<CustomerRolesModel> customerRolesModels = customerModel.getRole();
+        List<CustomerRolesModel> customerRolesModels = registrationModel.getRole();
         for(CustomerRolesModel customerRolesModel: customerRolesModels){
             CustomerRolesEntity customerRolesEntity = new CustomerRolesEntity();
             customerRolesEntity.setRoleName(customerRolesModel.getRoleName());
@@ -111,22 +111,22 @@ public class CustomerService {
     }
 
     //Update logic
-    public String updateCustomerDetails (CustomerModel customerModel) {
-        //Integer id =customerRepository.findByEmail(customerModel.getEmailAddress()); to find id using email
-        CustomerEntity customerEntity = customerRepository.findByEmail(customerModel.getEmailAddress());
+    public String updateCustomerDetails (RegistrationModel registrationModel) {
+        //Integer id =registrationRepository.findByEmail(registrationModel.getEmailAddress()); to find id using email
+        CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
        // CustomerEntity customerEntity = null;
         if (customerEntity == null) {
             return "Error: Customer not found.";
         }
-        customerEntity.setLoginType(customerModel.getLoginType());
-        customerEntity.setFirstName(customerModel.getFirstName());
-        customerEntity.setLastName(customerModel.getLastName());
-        customerEntity.setStatus(customerModel.getStatus());
+        customerEntity.setLoginType(registrationModel.getLoginType());
+        customerEntity.setFirstName(registrationModel.getFirstName());
+        customerEntity.setLastName(registrationModel.getLastName());
+        customerEntity.setStatus(registrationModel.getStatus());
 
 
         //validate email address
-        if (validateEmailAddress(customerModel.getEmailAddress())) {
-            customerEntity.setEmailAddress(customerModel.getEmailAddress());
+        if (validateEmailAddress(registrationModel.getEmailAddress())) {
+            customerEntity.setEmailAddress(registrationModel.getEmailAddress());
         } else {
             return "Email address is not correct please use @test.com";
         }
@@ -134,14 +134,14 @@ public class CustomerService {
 
 
         //validate mobile number
-        if (validateMobileNumber(customerModel.getMobileNumber())) {
-            customerEntity.setMobileNumber(customerModel.getMobileNumber());
+        if (validateMobileNumber(registrationModel.getMobileNumber())) {
+            customerEntity.setMobileNumber(registrationModel.getMobileNumber());
         } else {
             return "Mobile number is not correct";
         }
 
         try {
-            customerRepository.save(customerEntity);
+            registrationRepository.save(customerEntity);
         } catch (Exception e) {
             System.err.println("Error Details::" + e.getMessage());
         }
@@ -151,31 +151,31 @@ public class CustomerService {
     }
 
     //Fetch Customer Details
-    public CustomerModel fetchCustomerDetails (CustomerModel customerModel) {
-        CustomerEntity customerEntity = customerRepository.findByEmail(customerModel.getEmailAddress());
-        CustomerModel customerModel1 = new CustomerModel();
+    public RegistrationModel fetchCustomerDetails (RegistrationModel registrationModel) {
+        CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
+        RegistrationModel registrationModel1 = new RegistrationModel();
 
         if (customerEntity != null) {
-            customerModel1.setLoginType(customerEntity.getLoginType());
-            customerModel1.setFirstName(customerEntity.getFirstName());
-            customerModel1.setLastName(customerEntity.getLastName());
-            customerModel1.setEmailAddress(customerEntity.getEmailAddress());
-            customerModel1.setMobileNumber(customerEntity.getMobileNumber());
-            customerModel1.setPassword(customerEntity.getPassword());
+            registrationModel1.setLoginType(customerEntity.getLoginType());
+            registrationModel1.setFirstName(customerEntity.getFirstName());
+            registrationModel1.setLastName(customerEntity.getLastName());
+            registrationModel1.setEmailAddress(customerEntity.getEmailAddress());
+            registrationModel1.setMobileNumber(customerEntity.getMobileNumber());
+            registrationModel1.setPassword(customerEntity.getPassword());
 
 
         }
-        return customerModel1;
+        return registrationModel1;
     }
 
    /* //Delete method
-    public String deleteCustomerDetails(CustomerModel customerModel){
-        CustomerEntity customerEntity = customerRepository.findByEmail(customerModel.getEmailAddress());
+    public String deleteCustomerDetails(RegistrationModel customerModel){
+        CustomerEntity customerEntity = registrationRepository.findByEmail(customerModel.getEmailAddress());
         if(customerEntity != null) {
             // Delete the associated LoginEntity
             loginRepository.deleteByEmail(customerEntity.getEmailAddress());
             // Delete the customer
-            customerRepository.delete(customerEntity);
+            registrationRepository.delete(customerEntity);
             return "Customer deleted successfully.";
         } else {
             // Customer not found
@@ -185,7 +185,7 @@ public class CustomerService {
 */
    public String deleteCustomerInfo(Integer id) {
        try {
-           customerRepository.deleteById(id);
+           registrationRepository.deleteById(id);
        } catch(Exception e) {
            System.err.println("Error Details ::"+e.getMessage());
        }
