@@ -5,6 +5,7 @@ import com.example.registrationOfCustomer.entity.LoginEntity;
 import com.example.registrationOfCustomer.model.CustomerModel;
 import com.example.registrationOfCustomer.repository.LoginRepository;
 import com.example.registrationOfCustomer.repository.CustomerRepository;
+import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class CustomerService {
 
     @Autowired
     private LoginRepository loginRepository;
+
+    @Autowired
+    private RegistrationRepository registrationRepository;
 
     public String saveData(CustomerModel customerModel) {
         CustomerEntity customerEntity = new CustomerEntity();
@@ -82,8 +86,8 @@ public class CustomerService {
 
 
         try {
-            //registrationRepository.save(customerEntity);
-            loginRepository.save(loginEntity);
+            registrationRepository.save(customerEntity);
+            //loginRepository.save(loginEntity);
         } catch (Exception e) {
             System.err.println("Error Details ::" + e.getMessage());
         }

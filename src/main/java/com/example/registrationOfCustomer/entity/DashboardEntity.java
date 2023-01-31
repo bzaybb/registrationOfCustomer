@@ -49,5 +49,7 @@ public class DashboardEntity {
     @JoinColumn(name = "tripType")
     TripTypeEntity tripType;
 
+
+
 }
 
