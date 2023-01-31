@@ -41,7 +41,6 @@ public class CustomerEntity {
 
     // Maping login entity with customer entity
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY, orphanRemoval = true)
-    @MapsId
     @JoinColumn(name="login_id")
     private LoginEntity loginEntity;
 

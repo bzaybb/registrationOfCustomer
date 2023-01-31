@@ -1,13 +1,18 @@
 package com.example.registrationOfCustomer.service;
 
 import com.example.registrationOfCustomer.entity.CustomerEntity;
+import com.example.registrationOfCustomer.entity.CustomerRolesEntity;
 import com.example.registrationOfCustomer.entity.LoginEntity;
 import com.example.registrationOfCustomer.model.CustomerModel;
+import com.example.registrationOfCustomer.model.CustomerRolesModel;
+import com.example.registrationOfCustomer.repository.CustomerRolesRepository;
 import com.example.registrationOfCustomer.repository.LoginRepository;
 import com.example.registrationOfCustomer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 
 @Service
@@ -18,6 +23,8 @@ public class CustomerService {
 
     @Autowired
     private LoginRepository loginRepository;
+    @Autowired
+    private CustomerRolesRepository customerRolesRepository;
 
     public String saveData(CustomerModel customerModel) {
         CustomerEntity customerEntity = new CustomerEntity();
@@ -85,6 +92,19 @@ public class CustomerService {
             customerRepository.save(customerEntity);
             //loginRepository.save(loginEntity);
         } catch (Exception e) {
+            System.err.println("Error Details ::" + e.getMessage());
+        }
+        List<CustomerRolesEntity> customerRolesEntityList = new ArrayList<>();
+        List<CustomerRolesModel> customerRolesModels = customerModel.getRole();
+        for(CustomerRolesModel customerRolesModel: customerRolesModels){
+            CustomerRolesEntity customerRolesEntity = new CustomerRolesEntity();
+            customerRolesEntity.setRoleName(customerRolesModel.getRoleName());
+            customerRolesEntity.setLoginEntity(loginEntity);
+            customerRolesEntityList.add(customerRolesEntity);
+        }
+        try{
+            customerRolesRepository.saveAll(customerRolesEntityList);
+        } catch ( Exception e){
             System.err.println("Error Details ::" + e.getMessage());
         }
         return "success!!";

@@ -26,7 +26,7 @@ public class CustomerUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<CustomerRolesEntity> customerRolesEntityList = this.customerRolesRepository.findByEmailAddress(this.loginEntity);
+        List<CustomerRolesEntity> customerRolesEntityList = this.customerRolesRepository.findByLoginEntity(this.loginEntity);
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (CustomerRolesEntity roles: customerRolesEntityList){
             authorities.add(new SimpleGrantedAuthority((roles.getRoleName())));

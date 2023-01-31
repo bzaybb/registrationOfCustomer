@@ -3,6 +3,8 @@ package com.example.registrationOfCustomer.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class CustomerModel {
@@ -16,5 +18,6 @@ public class CustomerModel {
     private String mobileNumber;
     private String confirmPassword;
     private String status;
+    private List<CustomerRolesModel> role;
 
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CustomerRolesRepository extends JpaRepository<LoginEntity, Integer> {
+public interface CustomerRolesRepository extends JpaRepository<CustomerRolesEntity, Integer> {
 
-    List<CustomerRolesEntity> findByEmailAddress(LoginEntity loginEntity);
+    List<CustomerRolesEntity> findByLoginEntity(LoginEntity loginEntity);
 }
