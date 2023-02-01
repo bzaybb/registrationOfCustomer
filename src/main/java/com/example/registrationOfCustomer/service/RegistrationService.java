@@ -9,6 +9,7 @@ import com.example.registrationOfCustomer.repository.CustomerRolesRepository;
 import com.example.registrationOfCustomer.repository.LoginRepository;
 import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import java.util.regex.*;
 
 @Service
 public class RegistrationService {
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private RegistrationRepository registrationRepository;
@@ -32,13 +35,23 @@ public class RegistrationService {
         customerEntity.setLoginType(registrationModel.getLoginType());
         customerEntity.setFirstName(registrationModel.getFirstName());
         customerEntity.setLastName(registrationModel.getLastName());
-
+//Storing Password in encrypted form.
+        String encryptedPwd1 = "";
+        if(registrationModel.getPassword() != null){
+            encryptedPwd1 = this.bCryptPasswordEncoder.encode(registrationModel.getPassword());
+            System.out.println("Encrypted PWD : " + encryptedPwd1);
+        }
 
         //Login
 
         loginEntity.setLoginType(registrationModel.getLoginType());
         loginEntity.setEmailAddress(registrationModel.getEmailAddress());
-        loginEntity.setPassword(registrationModel.getPassword());
+        loginEntity.setPassword(encryptedPwd1);
+
+
+
+
+
         // setting login entity to the customer entity
         //loginEntity.setCustomerEntity(customerEntity);
         customerEntity.setLoginEntity(loginEntity);
@@ -62,14 +75,16 @@ public class RegistrationService {
 
 //validate confirmPassword with password
         if(registrationModel.getPassword().equals(registrationModel.getConfirmPassword())){
-            customerEntity.setConfirmPassword(registrationModel.getConfirmPassword());
+            customerEntity.setConfirmPassword(encryptedPwd1);
         }
         else{
             return "Error: Passwords do not match.";
         }
 
-        if(validatePassword(registrationModel.getPassword())){
-            customerEntity.setPassword(registrationModel.getPassword());
+        if(validatePassword(registrationModel.getPassword())) {
+            customerEntity.setPassword(encryptedPwd1);
+
+
         }
         else{
             return "Password format not correct. A password is considered valid if all the following constraints are satisfied:\n" +

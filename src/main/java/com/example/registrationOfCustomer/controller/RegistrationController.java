@@ -1,6 +1,9 @@
 package com.example.registrationOfCustomer.controller;
 
 import com.example.registrationOfCustomer.model.RegistrationModel;
+import com.example.registrationOfCustomer.repository.CustomerRolesRepository;
+import com.example.registrationOfCustomer.repository.LoginRepository;
+import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import com.example.registrationOfCustomer.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
+
+    @Autowired
+    LoginRepository loginRepository;
+
+    @Autowired
+    CustomerRolesRepository customerRolesRepository;
 
 
     @PostMapping("/customer")
@@ -53,9 +62,12 @@ public class RegistrationController {
         return "Customer deleted";
     }*/
 
-    @DeleteMapping("/deleteCustomerRecord")
+    @DeleteMapping("/delete")
     public String deleteCustomerRecord(@RequestParam Integer custId) {
-        this.registrationService.deleteCustomerInfo(custId);
+        this.customerRolesRepository.deleteByCustId(custId);
+        //this.loginRepository.deleteById(custId);
+
+        //this.registrationService.deleteCustomerInfo(custId);
 
         return "delete Successful!!";
     }
