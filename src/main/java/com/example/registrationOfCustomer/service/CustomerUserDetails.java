@@ -15,22 +15,32 @@ import java.util.List;
 public class CustomerUserDetails implements UserDetails {
 
     private LoginEntity loginEntity;
+private CustomerRolesRepository customerRolesRepository;
 
-    @Autowired
-    private CustomerRolesRepository customerRolesRepository;
 
-    public CustomerUserDetails(LoginEntity loginEntity){
+
+    public CustomerUserDetails(LoginEntity loginEntity, CustomerRolesRepository customerRolesRepository){
         this.loginEntity=loginEntity;
+        this.customerRolesRepository=customerRolesRepository;
     }
+
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<CustomerRolesEntity> customerRolesEntityList = this.customerRolesRepository.findByLoginEntity(this.loginEntity);
+        List<CustomerRolesEntity> customerRolesEntityList = null;
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (CustomerRolesEntity roles: customerRolesEntityList){
-            authorities.add(new SimpleGrantedAuthority((roles.getRoleName())));
+        try{
+            customerRolesEntityList = this.customerRolesRepository.findByLoginEntity(this.loginEntity);
+            for (CustomerRolesEntity roles: customerRolesEntityList){
+                authorities.add(new SimpleGrantedAuthority((roles.getRoleName())));
+            }
+
         }
+        catch (Exception e){
+            e.getMessage();
+        }
+
 
         return authorities;
     }

@@ -58,7 +58,7 @@ public UserAuthenticationService userAuthenticationService(){
                 .antMatchers(HttpMethod.POST, "/registration/customer").permitAll()
                 .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").hasAuthority("User")
                 .antMatchers(HttpMethod.PUT, "/registration/updateCustomer").hasAnyAuthority("User", "Admin")
-                .antMatchers(HttpMethod.DELETE, "/registration/deleteCustomerRecord").hasAuthority("User")
+                .antMatchers(HttpMethod.DELETE, "/registration/delete").hasAuthority("User")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
