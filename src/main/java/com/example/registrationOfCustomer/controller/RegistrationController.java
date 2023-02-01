@@ -1,5 +1,6 @@
 package com.example.registrationOfCustomer.controller;
 
+import com.example.registrationOfCustomer.entity.CustomerEntity;
 import com.example.registrationOfCustomer.model.RegistrationModel;
 import com.example.registrationOfCustomer.repository.CustomerRolesRepository;
 import com.example.registrationOfCustomer.repository.LoginRepository;
@@ -8,6 +9,8 @@ import com.example.registrationOfCustomer.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
@@ -15,7 +18,7 @@ public class RegistrationController {
     RegistrationService registrationService;
 
     @Autowired
-    LoginRepository loginRepository;
+    RegistrationRepository registrationRepository;
 
     @Autowired
     CustomerRolesRepository customerRolesRepository;
@@ -39,11 +42,13 @@ public class RegistrationController {
         return "Customer Detail is updated";
     }
 
-    @GetMapping("/fecthCustomer")
-    public RegistrationModel fetchCustomer(@RequestBody RegistrationModel registrationModel){
-
-        RegistrationModel registrationModel1 = this.registrationService.fetchCustomerDetails(registrationModel);
-        return registrationModel1;
+    @GetMapping("/fetchCustomer")
+    public CustomerEntity fetchCustomer(@RequestParam String emailAddress){
+       return this.registrationService.fetchCustomerDetails(emailAddress);
+    }
+    @GetMapping("/displayall")
+    public List<CustomerEntity> display(){
+        return this.registrationRepository.findAll();
     }
 
    /* @DeleteMapping("/{email}")
@@ -65,9 +70,7 @@ public class RegistrationController {
     @DeleteMapping("/delete")
     public String deleteCustomerRecord(@RequestParam Integer custId) {
         this.customerRolesRepository.deleteByCustId(custId);
-        //this.loginRepository.deleteById(custId);
-
-        //this.registrationService.deleteCustomerInfo(custId);
+        this.registrationRepository.deleteById(custId);
 
         return "delete Successful!!";
     }

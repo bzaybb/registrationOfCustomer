@@ -40,7 +40,7 @@ public class CustomerEntity {
     private String status;
 
     // Maping login entity with customer entity
-    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name="login_id")
     private LoginEntity loginEntity;
 

@@ -166,11 +166,11 @@ public class RegistrationService {
     }
 
     //Fetch Customer Details
-    public RegistrationModel fetchCustomerDetails (RegistrationModel registrationModel) {
-        CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
-        RegistrationModel registrationModel1 = new RegistrationModel();
+    public CustomerEntity fetchCustomerDetails (String emailAddress) {
+        CustomerEntity customerEntity = registrationRepository.findByEmail(emailAddress);
+       // RegistrationModel registrationModel1 = new RegistrationModel();
 
-        if (customerEntity != null) {
+      /*  if (customerEntity != null) {
             registrationModel1.setLoginType(customerEntity.getLoginType());
             registrationModel1.setFirstName(customerEntity.getFirstName());
             registrationModel1.setLastName(customerEntity.getLastName());
@@ -178,9 +178,8 @@ public class RegistrationService {
             registrationModel1.setMobileNumber(customerEntity.getMobileNumber());
             registrationModel1.setPassword(customerEntity.getPassword());
 
-
-        }
-        return registrationModel1;
+        }*/
+        return customerEntity;
     }
 
    /* //Delete method
@@ -198,14 +197,14 @@ public class RegistrationService {
         }
     }
 */
-   public String deleteCustomerInfo(Integer id) {
+  /* public String deleteCustomerInfo(Integer id) {
        try {
            registrationRepository.deleteById(id);
        } catch(Exception e) {
            System.err.println("Error Details ::"+e.getMessage());
        }
        return "Success";
-   }
+   }*/
 
 
 

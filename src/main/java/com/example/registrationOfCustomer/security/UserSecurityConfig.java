@@ -13,8 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 @EnableWebSecurity
@@ -56,9 +55,9 @@ public UserAuthenticationService userAuthenticationService(){
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/registration/customer").permitAll()
-                .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").hasAuthority("User")
-                .antMatchers(HttpMethod.PUT, "/registration/updateCustomer").hasAnyAuthority("User", "Admin")
-                .antMatchers(HttpMethod.DELETE, "/registration/delete").hasAuthority("User")
+                .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").hasAuthority("USER")
+                .antMatchers(HttpMethod.PUT, "/registration/updateCustomer").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/registration/delete").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
