@@ -336,7 +336,7 @@ public class DashboardService {
     }
 
 
-    public String updateDetail(Integer id,DashboardModel dashboardModel) {
+    public String updateDetail(int id,DashboardModel dashboardModel) {
         //find an entity by id
       DashboardEntity dashboardEntity1 = dashboardRepository.findById(id).get();
       //update entity information

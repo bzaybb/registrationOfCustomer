@@ -86,8 +86,8 @@ public class CustomerService {
 
 
         try {
-            registrationRepository.save(customerEntity);
-            //loginRepository.save(loginEntity);
+            //registrationRepository.save(customerEntity);
+            loginRepository.save(loginEntity);
         } catch (Exception e) {
             System.err.println("Error Details ::" + e.getMessage());
         }

@@ -50,14 +50,14 @@ public class DashboardController {
        // return  dashboardRepository.findAll();
     }
 
-    @PutMapping("updateBasePriceAndStatus/{id}")
-    public String updatePriceAndStatus(@PathVariable  Integer id, @RequestBody DashboardModel dashboardModel){
+    @PutMapping("updateBasePriceAndStatus")
+    public String updatePriceAndStatus(@RequestParam  int id, @RequestBody DashboardModel dashboardModel){
         String returnMessage = this.dashboardService.updateDetail(id,dashboardModel);
         return returnMessage;
     }
 
-    @DeleteMapping("delete/{id}")
-    public String deleteEmployee(@PathVariable int id) {
+    @DeleteMapping("delete")
+    public String deleteEmployee(@RequestParam int id) {
        String returnMessage= dashboardService.deleteById(id);
        return returnMessage;
     }

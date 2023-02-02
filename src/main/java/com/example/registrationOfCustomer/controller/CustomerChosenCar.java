@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customerChosen")
-public class CustomerChosenDashboard {
+public class CustomerChosenCar {
 
     @Autowired
     CustomerChosenService customerChosenService;
