@@ -16,13 +16,11 @@ import java.util.List;
 public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
-
     @Autowired
     RegistrationRepository registrationRepository;
 
     @Autowired
     CustomerRolesRepository customerRolesRepository;
-
 
     @PostMapping("/customer")
     public String customer(@RequestBody RegistrationModel registrationModel) {
@@ -50,22 +48,6 @@ public class RegistrationController {
     public List<CustomerEntity> display(){
         return this.registrationRepository.findAll();
     }
-
-   /* @DeleteMapping("/{email}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable RegistrationModel email) {
-        String result = registrationService.deleteCustomerDetails(email);
-        if (result != null) {
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
-        }
-    }*/
-
-   /* @DeleteMapping("/deleteCustomer")
-    public String deleteCustomer(@RequestBody RegistrationModel customerModel){
-        this.registrationService.deleteCustomerDetails(customerModel);
-        return "Customer deleted";
-    }*/
 
     @DeleteMapping("/delete")
     public String deleteCustomerRecord(@RequestParam Integer custId) {

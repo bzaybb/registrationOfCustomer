@@ -35,7 +35,8 @@ public class RegistrationService {
         customerEntity.setLoginType(registrationModel.getLoginType());
         customerEntity.setFirstName(registrationModel.getFirstName());
         customerEntity.setLastName(registrationModel.getLastName());
-//Storing Password in encrypted form.
+
+        //Storing Password in encrypted form.
         String encryptedPwd1 = "";
         if(registrationModel.getPassword() != null){
             encryptedPwd1 = this.bCryptPasswordEncoder.encode(registrationModel.getPassword());
@@ -48,14 +49,9 @@ public class RegistrationService {
         loginEntity.setEmailAddress(registrationModel.getEmailAddress());
         loginEntity.setPassword(encryptedPwd1);
 
-
-
-
-
         // setting login entity to the customer entity
         //loginEntity.setCustomerEntity(customerEntity);
         customerEntity.setLoginEntity(loginEntity);
-
 
         //email validation
 
@@ -84,7 +80,6 @@ public class RegistrationService {
         if(validatePassword(registrationModel.getPassword())) {
             customerEntity.setPassword(encryptedPwd1);
 
-
         }
         else{
             return "Password format not correct. A password is considered valid if all the following constraints are satisfied:\n" +
@@ -97,11 +92,7 @@ public class RegistrationService {
                     "It doesn’t contain any white space.";
         }
 
-
-
         customerEntity.setStatus(registrationModel.getStatus());
-
-
 
         try {
             registrationRepository.save(customerEntity);
@@ -128,16 +119,26 @@ public class RegistrationService {
     //Update logic
     public String updateCustomerDetails (RegistrationModel registrationModel) {
         //Integer id =registrationRepository.findByEmail(registrationModel.getEmailAddress()); to find id using email
-        CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
+        CustomerEntity customerEntity = this.registrationRepository.findByEmail(registrationModel.getEmailAddress());
        // CustomerEntity customerEntity = null;
         if (customerEntity == null) {
             return "Error: Customer not found.";
+        } else {
+            customerEntity.setLoginType(registrationModel.getLoginType());
+            customerEntity.setFirstName(registrationModel.getFirstName());
+            customerEntity.setLastName(registrationModel.getLastName());
+            customerEntity.setStatus(registrationModel.getStatus());
         }
-        customerEntity.setLoginType(registrationModel.getLoginType());
-        customerEntity.setFirstName(registrationModel.getFirstName());
-        customerEntity.setLastName(registrationModel.getLastName());
-        customerEntity.setStatus(registrationModel.getStatus());
+        LoginEntity loginEntity = new LoginEntity();
 
+        //Login
+
+        loginEntity.setLoginType(registrationModel.getLoginType());
+        loginEntity.setEmailAddress(registrationModel.getEmailAddress());
+        loginEntity.setPassword(registrationModel.getPassword());
+        // setting login entity to the customer entity
+        //loginEntity.setCustomerEntity(customerEntity);
+        customerEntity.setLoginEntity(loginEntity);
 
         //validate email address
         if (validateEmailAddress(registrationModel.getEmailAddress())) {
@@ -145,8 +146,6 @@ public class RegistrationService {
         } else {
             return "Email address is not correct please use @test.com";
         }
-
-
 
         //validate mobile number
         if (validateMobileNumber(registrationModel.getMobileNumber())) {
@@ -156,7 +155,7 @@ public class RegistrationService {
         }
 
         try {
-            registrationRepository.save(customerEntity);
+            this.registrationRepository.save(customerEntity);
         } catch (Exception e) {
             System.err.println("Error Details::" + e.getMessage());
         }

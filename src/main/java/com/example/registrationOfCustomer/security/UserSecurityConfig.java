@@ -55,7 +55,7 @@ public UserAuthenticationService userAuthenticationService(){
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/registration/customer").permitAll()
-                .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").hasAuthority("USER")
+                .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").permitAll()
                 .antMatchers(HttpMethod.PUT, "/registration/updateCustomer").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/registration/delete").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated()

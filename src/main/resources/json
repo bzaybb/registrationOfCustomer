@@ -9,8 +9,6 @@ Customer-Login:
 	"password": "encrypted String"
 }
 
-
-
 Customer-registration:
 ----------------------
 	{
@@ -161,7 +159,6 @@ Customer-dashboard:
 		"imageUrl": "tre.jpg"
 	}]
 }
-
 
 Cistomer-billing info:
 ----------------------
