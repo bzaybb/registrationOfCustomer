@@ -50,10 +50,6 @@ public class DashboardEntity {
 
     @Column(name = "image_Url")
     private String imageUrl;
-
-
-
-
     //
     @ManyToOne
     @JoinColumn(name = "tripType")

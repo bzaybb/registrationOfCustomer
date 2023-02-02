@@ -44,5 +44,4 @@ public class CustomerEntity {
     @JoinColumn(name="login_id")
     private LoginEntity loginEntity;
 
-
 }

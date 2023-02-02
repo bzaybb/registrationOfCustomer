@@ -17,20 +17,16 @@ public class LoginEntity {
 
     @Column(name= "login_Type")
     private String loginType;
-
     @Column (name= "email_Address")
     private String emailAddress;
 
     @Column (name="passowrd")
     private String password;
 
-
-
     /*// Maping customer entity with login entity
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY, orphanRemoval = true)
     @MapsId
     @JoinColumn(name="cust_id")
     private CustomerEntity customerEntity;*/
-
-
+    
 }
