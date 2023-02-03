@@ -54,6 +54,21 @@ public UserAuthenticationService userAuthenticationService(){
         httpSecurity.httpBasic()
                 .and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/dashboard/saveTripType").permitAll()
+                .antMatchers(HttpMethod.GET, "/dashboard/testGetMethod").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/dashboard/updateBasePriceAndStatus").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/dashboard/delete").hasAnyAuthority("USER", "ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/customerChosen/saveCustomerTrip").permitAll()
+                .antMatchers(HttpMethod.GET, "/customerChosen/customerDetailsByEmail").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/customerChosen/update").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/customerChosen/delete").hasAnyAuthority("USER", "ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/service/saveBill").permitAll()
+                .antMatchers(HttpMethod.GET, "/service/fetch").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/service/update").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/service/delete").hasAnyAuthority("USER", "ADMIN")
+
                 .antMatchers(HttpMethod.POST, "/registration/customer").permitAll()
                 .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").hasAuthority("USER")
                 .antMatchers(HttpMethod.PUT, "/registration/updateCustomer").hasAnyAuthority("USER", "ADMIN")

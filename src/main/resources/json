@@ -18,8 +18,8 @@ Customer-registration:
       "firstName": "DEF",
       "lastName": "tuytt",
       "emailAddress": "xyz@test.com",
-      "mobileNumber": 908765433,
-      "password": "cust_123",
+      "mobileNumber": 9087654330,
+      "password": "Cust_123",
       "role": [
         {
           "roleName": "ADMIN"
@@ -28,7 +28,7 @@ Customer-registration:
           "roleName": "USER"
         }
       ],
-      "confirmPassword": "cust_123",
+      "confirmPassword": "Cust_123",
       "status": "A"
     }
 
