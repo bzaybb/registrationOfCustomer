@@ -23,9 +23,4 @@ public class TripTypeEntity {
     private String tripType;
 
 
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    //private List<TripTypeModel> tripTypeModelList;
-//    List<DashboardModel>dashboardModels= new ArrayList<>();
-
 }

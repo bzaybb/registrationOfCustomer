@@ -7,7 +7,6 @@ import com.example.registrationOfCustomer.exception.RegistrationNotFoundExceptio
 import com.example.registrationOfCustomer.exception.TripTypeNotFoundException;
 import com.example.registrationOfCustomer.model.DashboardModel;
 import com.example.registrationOfCustomer.model.TripTypeModel;
-import com.example.registrationOfCustomer.repository.RegistrationRepository;
 import com.example.registrationOfCustomer.repository.DashboardRepository;
 import com.example.registrationOfCustomer.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,6 @@ public class DashboardService {
     DashboardRepository dashboardRepository;
     @Autowired
     TripRepository tripRepository;
-
-    @Autowired
-    RegistrationRepository registrationRepository;
-
     DashboardEntity dashboardEntity = new DashboardEntity();
     DashboardModel dashboardModel;
 
@@ -38,7 +33,6 @@ public class DashboardService {
     //if i put null on 2 method then it doenot work it gives me one error
     //it checks one condition at time but also at same time trip type table data will be save either the condition fails
     public String saveTripType(TripTypeModel tripTypeModel) throws Exception {
-        Integer customerId = this.registrationRepository.findByCustEmail("xyz@test.com");
         List<DashboardModel> local = tripTypeModel.getLocal();
         List<DashboardModel> oneWay = tripTypeModel.getOneWay();
         List<DashboardModel> roundTrip = tripTypeModel.getRoundTrip();
@@ -92,8 +86,6 @@ public class DashboardService {
                 dashboardEntity1.setCarACorNonAc(dashboardModel1.getCarACorNonAc());
                 dashboardEntity1.setCarSeater(dashboardModel1.getCarSeater());
                 dashboardEntity1.setBaggageCapacity(dashboardModel1.getBaggageCapacity());
-
-                dashboardEntity1.setCustId(customerId);// saving customer id in dashboard table.
                 try {
                     dashboardRepository.save(dashboardEntity1);
 

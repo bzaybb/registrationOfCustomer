@@ -32,12 +32,15 @@ public class RegistrationController {
 
     @PutMapping("/updateCustomer")
     public String updateCustomer(@RequestBody RegistrationModel registrationModel) {
+<<<<<<< HEAD
         /*Integer id = registrationModel.getId();
         Optional<CustomerEntity> customerEntity = this.customerRepository.findById(id);
         if (customerEntity==null){
             throw new CustomerNotFoundException();
         }*/
 
+=======
+>>>>>>> development/TEAM-B-FINAL
         this.registrationService.updateCustomerDetails(registrationModel);
         return "Customer Detail is updated";
     }
@@ -51,6 +54,7 @@ public class RegistrationController {
         return this.registrationRepository.findAll();
     }
 
+<<<<<<< HEAD
    /* @DeleteMapping("/{email}")
     public ResponseEntity<String> deleteCustomer(@PathVariable RegistrationModel email) {
         String result = registrationService.deleteCustomerDetails(email);
@@ -67,6 +71,8 @@ public class RegistrationController {
         return "Customer deleted";
     }*/
 
+=======
+>>>>>>> development/TEAM-B-FINAL
     @DeleteMapping("/delete")
     public String deleteCustomerRecord(@RequestParam Integer custId) {
         this.customerRolesRepository.deleteByCustId(custId);
@@ -75,7 +81,7 @@ public class RegistrationController {
         return "delete Successful!!";
     }
 
-//test
+
 
 }
 

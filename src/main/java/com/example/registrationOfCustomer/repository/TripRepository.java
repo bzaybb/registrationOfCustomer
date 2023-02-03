@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TripRepository extends JpaRepository<TripTypeEntity,Integer> {
-
-//@Query("SELECT t FROM TripTypeEntity  t where t.tripType=:tripType")
-TripTypeEntity findByTripType(String tripType);
-//DashboardEntity findByTrip(String tripType);
+    TripTypeEntity findByTripType(String tripType);
+    @Query("select t.id from TripTypeEntity t where t.tripType=:tripType")
+    Integer findByTripTypeName(String tripType);
+    TripTypeEntity findById(int id);
 }

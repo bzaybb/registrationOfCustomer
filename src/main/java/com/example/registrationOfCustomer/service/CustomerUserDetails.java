@@ -15,17 +15,17 @@ import java.util.List;
 public class CustomerUserDetails implements UserDetails {
 
     private LoginEntity loginEntity;
-private CustomerRolesRepository customerRolesRepository;
-
-
-
+    private CustomerRolesRepository customerRolesRepository;
     public CustomerUserDetails(LoginEntity loginEntity, CustomerRolesRepository customerRolesRepository){
         this.loginEntity=loginEntity;
         this.customerRolesRepository=customerRolesRepository;
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> development/TEAM-B-FINAL
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<CustomerRolesEntity> customerRolesEntityList = null;

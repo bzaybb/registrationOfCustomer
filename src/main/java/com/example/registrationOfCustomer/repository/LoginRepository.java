@@ -12,5 +12,7 @@ public interface LoginRepository extends JpaRepository<LoginEntity, Integer> {
 
     LoginEntity findByEmailAddress (String emailAddress);
 
+    LoginEntity findById(int id);
+
 
 }

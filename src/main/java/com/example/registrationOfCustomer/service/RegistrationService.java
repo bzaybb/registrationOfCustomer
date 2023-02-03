@@ -35,7 +35,7 @@ public class RegistrationService {
         customerEntity.setLoginType(registrationModel.getLoginType());
         customerEntity.setFirstName(registrationModel.getFirstName());
         customerEntity.setLastName(registrationModel.getLastName());
-//Storing Password in encrypted form.
+        //Storing Password in encrypted form.
         String encryptedPwd1 = "";
         if(registrationModel.getPassword() != null){
             encryptedPwd1 = this.bCryptPasswordEncoder.encode(registrationModel.getPassword());
@@ -127,7 +127,6 @@ public class RegistrationService {
 
     //Update logic
     public String updateCustomerDetails (RegistrationModel registrationModel) {
-        //Integer id =registrationRepository.findByEmail(registrationModel.getEmailAddress()); to find id using email
         CustomerEntity customerEntity = registrationRepository.findByEmail(registrationModel.getEmailAddress());
        // CustomerEntity customerEntity = null;
         if (customerEntity == null) {
@@ -168,46 +167,8 @@ public class RegistrationService {
     //Fetch Customer Details
     public CustomerEntity fetchCustomerDetails (String emailAddress) {
         CustomerEntity customerEntity = registrationRepository.findByEmail(emailAddress);
-       // RegistrationModel registrationModel1 = new RegistrationModel();
-
-      /*  if (customerEntity != null) {
-            registrationModel1.setLoginType(customerEntity.getLoginType());
-            registrationModel1.setFirstName(customerEntity.getFirstName());
-            registrationModel1.setLastName(customerEntity.getLastName());
-            registrationModel1.setEmailAddress(customerEntity.getEmailAddress());
-            registrationModel1.setMobileNumber(customerEntity.getMobileNumber());
-            registrationModel1.setPassword(customerEntity.getPassword());
-
-        }*/
         return customerEntity;
     }
-
-   /* //Delete method
-    public String deleteCustomerDetails(RegistrationModel customerModel){
-        CustomerEntity customerEntity = registrationRepository.findByEmail(customerModel.getEmailAddress());
-        if(customerEntity != null) {
-            // Delete the associated LoginEntity
-            loginRepository.deleteByEmail(customerEntity.getEmailAddress());
-            // Delete the customer
-            registrationRepository.delete(customerEntity);
-            return "Customer deleted successfully.";
-        } else {
-            // Customer not found
-            return "Customer not found.";
-        }
-    }
-*/
-  /* public String deleteCustomerInfo(Integer id) {
-       try {
-           registrationRepository.deleteById(id);
-       } catch(Exception e) {
-           System.err.println("Error Details ::"+e.getMessage());
-       }
-       return "Success";
-   }*/
-
-
-
 
     //Validation Methods
 private boolean validateEmailAddress(String emailAddress){

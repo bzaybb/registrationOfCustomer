@@ -8,12 +8,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegistrationRepository extends JpaRepository <CustomerEntity, Integer>{
 
+    CustomerEntity findById(int id);
+
     @Query("Select id from CustomerEntity  where emailAddress = :emailAddress")
     Integer findByCustEmail(String emailAddress);
-
-
     @Query("Select p from CustomerEntity p where p.emailAddress = :emailAddress")
     CustomerEntity findByEmail(String emailAddress);
+
+    CustomerEntity findByEmailAddress(String emailAddress);
 
 
     //@Query("Select id from CustomerEntity  where email = :email")
