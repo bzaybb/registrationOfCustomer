@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +24,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-public UserAuthenticationService userAuthenticationService(){
+    public UserAuthenticationService userAuthenticationService(){
         return new UserAuthenticationService();
     }
 
@@ -55,19 +54,19 @@ public UserAuthenticationService userAuthenticationService(){
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/dashboard/saveTripType").permitAll()
-                .antMatchers(HttpMethod.GET, "/dashboard/testGetMethod").permitAll()
-                .antMatchers(HttpMethod.PUT, "/dashboard/updateBasePriceAndStatus").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/dashboard/delete").permitAll()
+                .antMatchers(HttpMethod.GET, "/dashboard/testGetMethod").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/dashboard/updateBasePriceAndStatus").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/dashboard/delete").hasAnyAuthority("USER", "ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/customerChosen/saveCustomerTrip").permitAll()
-                .antMatchers(HttpMethod.GET, "/customerChosen/customerDetailsByEmail").permitAll()
-                .antMatchers(HttpMethod.PUT, "/customerChosen/update").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/customerChosen/delete").permitAll()
+                .antMatchers(HttpMethod.GET, "/customerChosen/customerDetailsByEmail").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/customerChosen/update").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/customerChosen/delete").hasAnyAuthority("USER", "ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/service/saveBill").permitAll()
-                .antMatchers(HttpMethod.GET, "/service/fetch").permitAll()
-                .antMatchers(HttpMethod.PUT, "/service/update").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/service/delete").permitAll()
+                .antMatchers(HttpMethod.GET, "/service/fetch").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/service/update").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/service/delete").hasAnyAuthority("USER", "ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/registration/customer").permitAll()
                 .antMatchers(HttpMethod.GET, "/registration/fetchCustomer").hasAuthority("USER")
