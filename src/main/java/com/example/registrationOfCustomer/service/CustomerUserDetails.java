@@ -21,11 +21,7 @@ public class CustomerUserDetails implements UserDetails {
         this.customerRolesRepository=customerRolesRepository;
     }
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> development/TEAM-B-FINAL
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<CustomerRolesEntity> customerRolesEntityList = null;
@@ -75,4 +71,3 @@ public class CustomerUserDetails implements UserDetails {
         return true;
     }
 }
-//test

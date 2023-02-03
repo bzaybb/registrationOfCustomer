@@ -32,7 +32,7 @@ public class CustomerChosenService {
 
     public String customerChosenTripType(CustomerChosenModel customerChosenModel) {
         CustomerChosenTrip customerChosenTrip = new CustomerChosenTrip();
-            Integer customerId = registrationRepository.findByCustEmail("bk@test.com");
+            Integer customerId = registrationRepository.findByCustEmail("dijay@test.com");
             List<CustomerChosenTrip> customerChosenTrips= this.customerChosenRepository.findByCustomerId(customerId);
 
                 customerChosenTrip.setTripType(customerChosenModel.getTripType());
@@ -127,7 +127,7 @@ public class CustomerChosenService {
     }
 
     public List<CustomerChosenModel> fetchCustomerChosen(String emailAddress) {
-        Integer customerId = registrationRepository.findByCustEmail("barsha@test.com");
+        Integer customerId = registrationRepository.findByCustEmail("dijay@test.com");
          List<CustomerChosenTrip> customerChosenTrips= this.customerChosenRepository.findByCustomerId(customerId);
          List<CustomerChosenModel> customerChosenModels = new ArrayList<>();
         if (customerChosenTrips != null) {
@@ -168,7 +168,7 @@ public class CustomerChosenService {
     }
 
     public String updateCustomerChosen(CustomerChosenModel customerChosenModel ) {
-        Integer customerId= this.registrationRepository.findByCustEmail("bk@test.com");
+        Integer customerId= this.registrationRepository.findByCustEmail("dijay@test.com");
 
         CustomerChosenTrip customerChosenTrip = this.customerChosenRepository.findModelById(customerId,customerChosenModel.getCarRegistration());
         customerChosenTrip.setTripType(customerChosenModel.getTripType());
@@ -191,6 +191,10 @@ public class CustomerChosenService {
         customerChosenTrip.setEndDate(endDateCalender);
         customerChosenTrip.setBaggageCapacity(customerChosenModel.getBaggageCapacity());
         customerChosenTrip.setCarRegistration(customerChosenModel.getCarRegistration());
+        customerChosenTrip.setCarModel(customerChosenModel.getCarModel());
+        customerChosenTrip.setStatus(customerChosenModel.getStatus());
+        customerChosenTrip.setBasePrice(customerChosenModel.getBasePrice());
+        customerChosenTrip.setCarACorNonAc(customerChosenModel.getCarACorNonAc());
 
         this.customerChosenRepository.save(customerChosenTrip);
         return "updated";
@@ -198,7 +202,7 @@ public class CustomerChosenService {
 
     public String deleteAll(List<String> carRegistration) {
 
-        Integer customerId= registrationRepository.findByCustEmail("bk@test.com");
+        Integer customerId= registrationRepository.findByCustEmail("dijay@test.com");
         try{
             customerChosenRepository.deleteAllByCustomerIdAndCarRegistration(customerId,carRegistration);
         }catch (Exception e){

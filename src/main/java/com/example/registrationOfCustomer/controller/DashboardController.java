@@ -56,8 +56,8 @@ public class DashboardController {
         return returnMessage;
     }
 
-    @DeleteMapping("delete/{id}")
-    public String deleteEmployee(@PathVariable int id) {
+    @DeleteMapping("delete")
+    public String deleteEmployee(@RequestParam int id) {
        String returnMessage= dashboardService.deleteById(id);
        return returnMessage;
     }

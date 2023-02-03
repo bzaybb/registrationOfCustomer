@@ -32,15 +32,8 @@ public class RegistrationController {
 
     @PutMapping("/updateCustomer")
     public String updateCustomer(@RequestBody RegistrationModel registrationModel) {
-<<<<<<< HEAD
-        /*Integer id = registrationModel.getId();
-        Optional<CustomerEntity> customerEntity = this.customerRepository.findById(id);
-        if (customerEntity==null){
-            throw new CustomerNotFoundException();
-        }*/
 
-=======
->>>>>>> development/TEAM-B-FINAL
+
         this.registrationService.updateCustomerDetails(registrationModel);
         return "Customer Detail is updated";
     }
@@ -54,25 +47,6 @@ public class RegistrationController {
         return this.registrationRepository.findAll();
     }
 
-<<<<<<< HEAD
-   /* @DeleteMapping("/{email}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable RegistrationModel email) {
-        String result = registrationService.deleteCustomerDetails(email);
-        if (result != null) {
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
-        }
-    }*/
-
-   /* @DeleteMapping("/deleteCustomer")
-    public String deleteCustomer(@RequestBody RegistrationModel customerModel){
-        this.registrationService.deleteCustomerDetails(customerModel);
-        return "Customer deleted";
-    }*/
-
-=======
->>>>>>> development/TEAM-B-FINAL
     @DeleteMapping("/delete")
     public String deleteCustomerRecord(@RequestParam Integer custId) {
         this.customerRolesRepository.deleteByCustId(custId);
