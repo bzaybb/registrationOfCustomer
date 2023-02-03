@@ -42,24 +42,5 @@ public class CustomerController {
         return customerModel1;
     }
 
-   /* @DeleteMapping("/{email}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable CustomerModel email) {
-        String result = customerService.deleteCustomerDetails(email);
-        if (result != null) {
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
-        }
-    }*/
-
-   /* @DeleteMapping("/deleteCustomer")
-    public String deleteCustomer(@RequestBody CustomerModel customerModel){
-        this.customerService.deleteCustomerDetails(customerModel);
-        return "Customer deleted";
-    }*/
-
-
-
-
 }
 

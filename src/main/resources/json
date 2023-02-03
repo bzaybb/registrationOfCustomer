@@ -13,16 +13,25 @@ Customer-Login:
 
 Customer-registration:
 ----------------------
-{
-	"loginType": "customer-login",
-	"firstName": "DEF",
-	"lastName": "tuytt",
-	"emailAddress": "xyz@test.com",
-	"mobileNumber": 908765433,
-	"password": "cust_123",
-	"confirmPassword": "cust_123",
-	"status": "A"
-}
+	{
+          "loginType": "customer-login",
+          "firstName": "DEF",
+          "lastName": "tuytt",
+          "emailAddress": "xyz@test.com",
+          "mobileNumber": 9087654333,
+          "password": "Cust_123",
+          "role": [
+            {
+              "roleName": "ADMIN"
+            },
+            {
+              "roleName": "USER"
+            }
+          ],
+          "confirmPassword": "Cust_123",
+          "status": "A"
+        }
+
 
 Customer-dashboard:
 -------------------
@@ -31,30 +40,30 @@ Customer-dashboard:
 		"carType": "sedan",
 		"carModel": "Etios",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA3234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$4",
+		"basePrice": "4",
 		"status": "Available",
 		"imageUrl": "abc.jpg"
 	}, {
 		"carType": "SUV",
 		"carModel": "Innova",
 		"carSeater": "5-seater",
-		"bagageCapacity": "3-bags",
+		"baggageCapacity": "3-bags",
 		"carRegistration": "KA4234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$8",
+		"basePrice": "8",
 		"status": "Available",
 		"imageUrl": "rtc.jpg"
 	}, {
 		"carType": "Hatchback",
 		"carModel": "Swift",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA7834RT",
 		"carACorNonAc": "nonAC",
-		"basePrice": "$3",
+		"basePrice": "3",
 		"status": "Available",
 		"imageUrl": "tre.jpg"
 	}],
@@ -62,30 +71,30 @@ Customer-dashboard:
 		"carType": "sedan",
 		"carModel": "Etios",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA3234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$4",
+		"basePrice": "4",
 		"status": "Available",
 		"imageUrl": "abc.jpg"
 	}, {
 		"carType": "SUV",
 		"carModel": "Innova",
 		"carSeater": "5-seater",
-		"bagageCapacity": "3-bags",
+		"baggageCapacity": "3-bags",
 		"carRegistration": "KA4234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$8",
+		"basePrice": "8",
 		"status": "Available",
 		"imageUrl": "rtc.jpg"
 	}, {
 		"carType": "Hatchback",
 		"carModel": "Swift",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA7834RT",
 		"carACorNonAc": "nonAC",
-		"basePrice": "$3",
+		"basePrice": "3",
 		"status": "Available",
 		"imageUrl": "tre.jpg"
 	}],
@@ -93,30 +102,30 @@ Customer-dashboard:
 		"carType": "sedan",
 		"carModel": "Etios",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA3234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$4",
+		"basePrice": "4",
 		"status": "Available",
 		"imageUrl": "abc.jpg"
 	}, {
 		"carType": "SUV",
 		"carModel": "Innova",
 		"carSeater": "5-seater",
-		"bagageCapacity": "3-bags",
+		"baggageCapacity": "3-bags",
 		"carRegistration": "KA4234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$8",
+		"basePrice": "8",
 		"status": "Available",
 		"imageUrl": "rtc.jpg"
 	}, {
 		"carType": "Hatchback",
 		"carModel": "Swift",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA7834RT",
 		"carACorNonAc": "nonAC",
-		"basePrice": "$3",
+		"basePrice": "3",
 		"status": "Available",
 		"imageUrl": "tre.jpg"
 	}],
@@ -124,36 +133,34 @@ Customer-dashboard:
 		"carType": "sedan",
 		"carModel": "Etios",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA3234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$4",
+		"basePrice": "4",
 		"status": "Available",
 		"imageUrl": "abc.jpg"
 	}, {
 		"carType": "SUV",
 		"carModel": "Innova",
 		"carSeater": "5-seater",
-		"bagageCapacity": "3-bags",
+		"baggageCapacity": "3-bags",
 		"carRegistration": "KA4234RT",
 		"carACorNonAc": "AC",
-		"basePrice": "$8",
+		"basePrice": "8",
 		"status": "Available",
 		"imageUrl": "rtc.jpg"
 	}, {
 		"carType": "Hatchback",
 		"carModel": "Swift",
 		"carSeater": "4-seater",
-		"bagageCapacity": "2-bags",
+		"baggageCapacity": "2-bags",
 		"carRegistration": "KA7834RT",
 		"carACorNonAc": "nonAC",
-		"basePrice": "$3",
+		"basePrice": "3",
 		"status": "Available",
 		"imageUrl": "tre.jpg"
 	}]
 }
-
-
 Cistomer-billing info:
 ----------------------
 {

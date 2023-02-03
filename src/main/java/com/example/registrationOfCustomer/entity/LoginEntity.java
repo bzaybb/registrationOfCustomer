@@ -24,6 +24,8 @@ public class LoginEntity {
     @Column (name="passowrd")
     private String password;
 
+
+
     /*// Maping customer entity with login entity
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY, orphanRemoval = true)
     @MapsId
